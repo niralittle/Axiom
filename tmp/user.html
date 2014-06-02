@@ -6,9 +6,10 @@
 </head>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="main.css">
-
+<script type="text/javascript" src="jquery.js"></script>
 <body>
 <div id="page">
+
     <div class="header">
         <div style="background-color: #CAD958; height: 20px; margin: 0 0 3px 0;"></div>
         <div style="background-color: #58CAD9; height: 10px;"></div>
@@ -20,16 +21,13 @@
                     <img class="avatar" src="https://avatars2.githubusercontent.com/u/5579194?s=460" align="center"/>
                 </td>
                 <td style="padding-left: 15px;">
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-default">Факультет: ФІ-2
-                            <br>спеціальність: програмна інженерія
-                            <br><span class="label label-success">Відкрита для цікавих проектів</span>
-
-                            <br>
-                            <br>
-                            <button class="btn btn-info btn-xs">Детальніше</button>
-                        </li>
-                    </ul>
+                    <blockquote>
+                        <p>Унівєр &mdash; що тобі ще треба, могилянцю?)</p>
+                    </blockquote>
+                    <span class="label label-default">ФІ-2</span>
+                    <br><span class="label label-default">програмна інженерія</span>
+                    <br><span class="label label-success">online</span>
+                    <br>
                 </td>
             </tr>
         </table>
@@ -38,56 +36,78 @@
 
     <div class="menu"></div>
 
-    <div class="content">
-        <div class="wall">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Interesting info</h3>
-                </div>
-                <div class="panel-body">La-la-la-la-la-la-la</div>
-            </div>
-            <br>
+    <div class="content" width="675px">
+        <div class="tabs">
+            <ul class="tab-links">
+                <li class="active"><a href="#tab1">Стіна</a></li>
+                <li><a href="#tab2">Деталі профілю</a></li>
+                <li><a href="#tab3">Налаштування сторінки</a></li>
+            </ul>
 
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">A post with an image :)</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object"
-                                 src="http://www.upc.edu/la-upc/la-institucio/imatges/mi-fundacio1.jpg"/>
-                        </a>
-
-                        <div class="media-body">
-                            <p>A lot of interesting text that has something to do with the image</p>
+            <div class="tab-content">
+                <div id="tab1" class="tab active">
+                    <div class="wall">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Interesting info</h3>
+                            </div>
+                            <div class="panel-body">La-la-la-la-la-la-la</div>
                         </div>
+                        <br>
+
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">A post with an image :)</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object"
+                                             src="http://www.upc.edu/la-upc/la-institucio/imatges/mi-fundacio1.jpg"/>
+                                    </a>
+
+                                    <div class="media-body">
+                                        <p>A lot of interesting text that has something to do with the image</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">And my second post!</h3>
+                            </div>
+                            <div class="panel-body">Panel content</div>
+                        </div>
+                        <br>
+
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">My first post!</h3>
+                            </div>
+                            <div class="panel-body">Panel content</div>
+                        </div>
+                        <br>
                     </div>
                 </div>
-            </div>
-            <br>
 
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">And my second post!</h3>
+                <div id="tab2" class="tab">
+                    <div class="user_info"><p>lkdjfvhlbdfgdfgd</p></div>
                 </div>
-                <div class="panel-body">Panel content</div>
-            </div>
-            <br>
 
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">My first post!</h3>
+                <div id="tab3" class="tab">
+                    <div class="settings"><p>uuuuuuuuuuuuuuuuuuuuu</p></div>
                 </div>
-                <div class="panel-body">Panel content</div>
             </div>
-            <br>
         </div>
+
     </div>
     <div class="footer">
         <div style="background-color: #CAD958; height: 20px; margin: 0 0 3px 0;"></div>
         <div style="background-color: #58CAD9; height: 10px;"></div>
     </div>
 </div>
+
 </body>
 </html>

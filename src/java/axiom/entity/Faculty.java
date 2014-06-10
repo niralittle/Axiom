@@ -2,14 +2,14 @@ package axiom.entity;
 
 /**
  *
- * @author Nira
+ * @author user
  */
+public class Faculty {
 
-public class Skill {
     int id;
     String name;
 
-    public Skill(int id, String name) {
+    public Faculty(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -25,5 +25,7 @@ public class Skill {
     public void setName(String name) {
         this.name = name;
     }
+
+
 
 }

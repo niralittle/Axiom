@@ -2,14 +2,13 @@ package axiom.entity;
 
 /**
  *
- * @author Nira
+ * @author user
  */
-public class StartupState {
-
+public class Profilestate {
     int id;
     String description;
 
-    public StartupState(int id, String description) {
+    public Profilestate(int id, String description) {
         this.id = id;
         this.description = description;
     }
@@ -25,6 +24,9 @@ public class StartupState {
     public int getId() {
         return id;
     }
+
+
+
 
 
 }

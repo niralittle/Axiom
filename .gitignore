@@ -1,0 +1,28 @@
+# NetBeans specific #
+
+nbactions.xml
+nb-configuration.xml
+
+# For Unix #
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+
+# For Windows #
+nbproject\private\
+build\
+nbbuild\
+dist\
+nbdist\
+
+# Class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+.DS_Store

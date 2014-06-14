@@ -1,7 +1,5 @@
 package axiom.dao.impl;
 
-import axiom.dao.GenericDAO;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -12,11 +10,11 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import nc.notus.dao.GenericDAO;
-import nc.notus.dbmanager.DBManager;
-import nc.notus.dbmanager.DBManagerException;
-import nc.notus.dbmanager.ResultIterator;
-import nc.notus.dbmanager.Statement;
+import axiom.dao.GenericDAO;
+import axiom.dbmanager.DBManager;
+import axiom.dbmanager.DBManagerException;
+import axiom.dbmanager.ResultIterator;
+import axiom.dbmanager.Statement;
 
 /**
  * Implementation of generic DAO interface. Only CRUD operations are provided by
@@ -72,39 +70,40 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
             }
         }
         Statement statement = null;
-		try {
-			statement = dbManager.prepareStatement(query.toString());
-			// fill in statement
-			int paramIndex = 1;
-			for (Object value : params.values()) {
-				if (value != null) {
-					statement.setObject(paramIndex++, value);
-				}
-			}
+        try {
+            statement = dbManager.prepareStatement(query.toString());
+            // fill in statement
+            int paramIndex = 1;
+            for (Object value : params.values()) {
+                    if (value != null) {
+                            statement.setObject(paramIndex++, value);
+                    }
+            }
 
-			ResultIterator ri = statement.executeQuery();
-			ri.next();
-			return ri.getLong(1); // element at position (1,1)
+            ResultIterator ri = statement.executeQuery();
+            ri.next();
+            return ri.getLong(1); // element at position (1,1)
 
-		} catch (DBManagerException exc) {
-			throw new DBManagerException("An error  occured, please"
-					+ "contact the administrator");
-		} finally {
-			statement.close();
-		}
+        } catch (DBManagerException exc) {
+            throw new DBManagerException("An error  occured, please"
+                            + "contact the administrator");
+        } finally {
+                statement.close();
+        }
     }
 
-/**
+    /**
      * Method that returns the number of entries from a table that meet some
      * criteria (LIKE cause params)
      * @param params sql parameters (name-value) that are criteria for SELECT
      * @return the number of records meeting the criteria
      */
     @Override
-    public long countAllWithLikeCause(Map<String, Object> params) throws DBManagerException {
+    public long countAllWithLikeCause(Map<String, Object> params)
+            throws DBManagerException {
     	if (params == null) {
-    		throw new DBManagerException("Passed parameter <params> is null."
-    				+ " Can't proccess null reference!");
+            throw new DBManagerException("Passed parameter <params> is null."
+                            + " Can't proccess null reference!");
     	} 
     	// form SQL query
         StringBuilder query = new StringBuilder();
@@ -124,26 +123,26 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
             }
         }
         Statement statement = null;
-		try {
-			statement = dbManager.prepareStatement(query.toString());
-			// fill in statement
-			int paramIndex = 1;
-			for (Object value : params.values()) {
-				if (value != null) {
-					statement.setObject(paramIndex++, value);
-				}
-			}
+        try {
+            statement = dbManager.prepareStatement(query.toString());
+            // fill in statement
+            int paramIndex = 1;
+            for (Object value : params.values()) {
+                    if (value != null) {
+                            statement.setObject(paramIndex++, value);
+                    }
+            }
 
-			ResultIterator ri = statement.executeQuery();
-			ri.next();
-			return ri.getLong(1); // element at position (1,1)
+            ResultIterator ri = statement.executeQuery();
+            ri.next();
+            return ri.getLong(1); // element at position (1,1)
 
-		} catch (DBManagerException exc) {
-			throw new DBManagerException("An error  occured, "
-					+ "contact the administrator");
-		} finally {
-			statement.close();
-		}
+        } catch (DBManagerException exc) {
+            throw new DBManagerException("An error  occured, "
+                            + "contact the administrator");
+        } finally {
+                statement.close();
+        }
     }
     
     /**
@@ -172,24 +171,24 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         query.delete(query.length()-2, query.length()); // trim last ", "
         query.append(')');
         Statement statement = null;
-		try {
-			statement = dbManager.prepareStatement(query.toString());
-			// fill in statement
-			int paramIndex = 1;
-			for (Object value : fields.values()) {
-				if (value != null) {
-					statement.setObject(paramIndex++, value);
-				}
-			}
-			statement.executeUpdate();
-			Object primaryKey = statement.getGeneratedPrimaryKey();
-			return primaryKey;
-		} catch (DBManagerException exc) {
-			throw new DBManagerException("An error  occured, "
-					+ "contact the administrator");
-		} finally {
-			statement.close();
-		}
+        try {
+            statement = dbManager.prepareStatement(query.toString());
+            // fill in statement
+            int paramIndex = 1;
+            for (Object value : fields.values()) {
+                    if (value != null) {
+                            statement.setObject(paramIndex++, value);
+                    }
+            }
+            statement.executeUpdate();
+            Object primaryKey = statement.getGeneratedPrimaryKey();
+            return primaryKey;
+        } catch (DBManagerException exc) {
+            throw new DBManagerException("An error  occured, "
+                            + "contact the administrator");
+        } finally {
+                statement.close();
+        }
     }
 
     /**
@@ -199,23 +198,23 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     @Override
     public void delete(Object id) throws DBManagerException {
     	Statement statement = null;
-		try {
-			if (id instanceof Number) {
-				String queryString = "DELETE FROM " + type.getSimpleName()
-										+ " WHERE id = ?";
-				statement = dbManager.prepareStatement(queryString);
-				statement.setObject(1, id);
-				statement.executeUpdate();
-				statement.close();
-			} else {
-				throw new DBManagerException("Wrong primary key type");
-			}
-		} catch (DBManagerException exc) {
-			throw new DBManagerException("An error occured, "
-					+ "contact the administrator");
-		} finally {
-			statement.close();
-		}
+        try {
+            if (id instanceof Number) {
+                String queryString = "DELETE FROM " + type.getSimpleName()
+                                                                + " WHERE id = ?";
+                statement = dbManager.prepareStatement(queryString);
+                statement.setObject(1, id);
+                statement.executeUpdate();
+                statement.close();
+            } else {
+                throw new DBManagerException("Wrong primary key type");
+            }
+        } catch (DBManagerException exc) {
+            throw new DBManagerException("An error occured, "
+                            + "contact the administrator");
+        } finally {
+            statement.close();
+        }
     }
 
     /**
@@ -235,64 +234,64 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         String queryString =
                 "SELECT * FROM " + type.getSimpleName() + " WHERE id = ?";
         Statement statement = null;
-		try {
-			statement = dbManager.prepareStatement(queryString);
-			statement.setObject(1, id);
-			ResultIterator ri = statement.executeQuery();
-			if (!ri.next()) {
-				throw new DBManagerException("No record found for given primary key");
-			}
+        try {
+                statement = dbManager.prepareStatement(queryString);
+            statement.setObject(1, id);
+            ResultIterator ri = statement.executeQuery();
+            if (!ri.next()) {
+                    throw new DBManagerException("No record found for given primary key");
+            }
 
-			T t = type.newInstance();
-			Map<String, Object> fields = getFieldsList(t);
-			for (String fieldName : fields.keySet()) {
-				String methodName = "set"
-						+ fieldName.substring(0, 1).toUpperCase()
-						+ fieldName.substring(1);
-				Field field = type.getDeclaredField(fieldName);
-				Method method = type.getDeclaredMethod(methodName,
-						field.getType());
-				if (field.getType() == int.class) {
-					method.invoke(t, ri.getInt(fieldName));
-				} else if (field.getType() == long.class) {
-					method.invoke(t, ri.getLong(fieldName));
-				} else if (field.getType() == boolean.class) {
-					method.invoke(t, ri.getBoolean(fieldName));
-				} else if (field.getType() == String.class) {
-					method.invoke(t, ri.getString(fieldName));
-				} else if (field.getType() == Integer.class) {
-					Integer val;
-					if (ri.getObject(fieldName) != null) {
-						val = ri.getInt(fieldName);
-					} else {
-						val = null;
-					}
-					method.invoke(t, val);
-				} else if (field.getType() == Date.class) {
-					Date date;
-					if (ri.getObject(fieldName) != null) {
-						date = ri.getDate(fieldName);
-					} else {
-						date = null;
-					}
-					method.invoke(t, date);
-				} else {
-					throw new DBManagerException("Incompatible field type");
-				}
-			}
-			return t;
-		} catch (InstantiationException exc) {
-			throw new DBManagerException("Cannot create entity instance", exc);
-		} catch (DBManagerException exc) {
-			throw new DBManagerException("The error was occured, "
-					+ "contact the administrator");
-		} catch (Exception e) {
-			logger.error("Error occured at :", e);
-			throw new DBManagerException("No access to method or field, "
-					+ "contact the administrator");
-		} finally {
-			statement.close();
-		}
+            T t = type.newInstance();
+            Map<String, Object> fields = getFieldsList(t);
+            for (String fieldName : fields.keySet()) {
+                String methodName = "set"
+                                + fieldName.substring(0, 1).toUpperCase()
+                                + fieldName.substring(1);
+                Field field = type.getDeclaredField(fieldName);
+                Method method = type.getDeclaredMethod(methodName,
+                                field.getType());
+                if (field.getType() == int.class) {
+                        method.invoke(t, ri.getInt(fieldName));
+                } else if (field.getType() == long.class) {
+                        method.invoke(t, ri.getLong(fieldName));
+                } else if (field.getType() == boolean.class) {
+                        method.invoke(t, ri.getBoolean(fieldName));
+                } else if (field.getType() == String.class) {
+                        method.invoke(t, ri.getString(fieldName));
+                } else if (field.getType() == Integer.class) {
+                        Integer val;
+                        if (ri.getObject(fieldName) != null) {
+                                val = ri.getInt(fieldName);
+                        } else {
+                                val = null;
+                        }
+                        method.invoke(t, val);
+                } else if (field.getType() == Date.class) {
+                        Date date;
+                        if (ri.getObject(fieldName) != null) {
+                                date = ri.getDate(fieldName);
+                        } else {
+                                date = null;
+                        }
+                        method.invoke(t, date);
+                } else {
+                        throw new DBManagerException("Incompatible field type");
+                }
+            }
+            return t;
+        } catch (InstantiationException exc) {
+            throw new DBManagerException("Cannot create entity instance", exc);
+        } catch (DBManagerException exc) {
+            throw new DBManagerException("The error was occured, "
+                            + "contact the administrator");
+        } catch (Exception e) {
+            logger.error("Error occured at :", e);
+            throw new DBManagerException("No access to method or field, "
+                            + "contact the administrator");
+        } finally {
+            statement.close();
+        }
         
     }
 
@@ -333,24 +332,24 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         query.append(" WHERE id = ?");
 
         Statement statement = null;
-		try {
-			statement = dbManager.prepareStatement(query.toString());
-			// fill in statement
-			int paramIndex = 1;
-			for (Object value : fieldsList.values()) {
-				if (value != null) {
-					statement.setObject(paramIndex++, value);
-				}
-			}
-			statement.setObject(paramIndex, id);
-			statement.executeUpdate();
-			statement.close();
-		} catch (DBManagerException exc) {
-			throw new DBManagerException("An error  occured, "
-					+ "contact the administrator");
-		} finally {
-			statement.close();
-		}
+        try {
+            statement = dbManager.prepareStatement(query.toString());
+            // fill in statement
+            int paramIndex = 1;
+            for (Object value : fieldsList.values()) {
+                    if (value != null) {
+                            statement.setObject(paramIndex++, value);
+                    }
+            }
+            statement.setObject(paramIndex, id);
+            statement.executeUpdate();
+            statement.close();
+        } catch (DBManagerException exc) {
+            throw new DBManagerException("An error  occured, "
+                            + "contact the administrator");
+        } finally {
+            statement.close();
+        }
     }
 
     /**

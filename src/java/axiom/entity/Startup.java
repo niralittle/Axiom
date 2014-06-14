@@ -1,5 +1,4 @@
 package axiom.entity;
-import java.util.Map;
 
 /**
  *

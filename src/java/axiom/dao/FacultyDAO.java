@@ -1,14 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package axiom.dao;
+
+import java.util.List;
+import axiom.entity.Faculty;
+import axiom.dbmanager.DBManagerException;
 
 /**
  *
  * @author Nira
  */
-public interface FacultyDAO {
+
+public interface FacultyDAO extends GenericDAO {
+
+    public Faculty getFacultyByName(String name) throws DBManagerException;
+
+    public List<Faculty> getAllFaculty() throws DBManagerException;
 
 }

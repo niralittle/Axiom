@@ -8,11 +8,15 @@ public class Participant {
     int userId;
     int startupId;
     String role;
+    
+    //Startup's owner asks user, user asks owner user is already in
+    //int state;
 
-    public Participant(int userId, int startupId, String role) {
+    public Participant(int userId, int startupId, String role, int state) {
         this.userId = userId;
         this.startupId = startupId;
         this.role = role;
+        //this.state = state;
     }
 
     public String getRole() {
@@ -22,6 +26,15 @@ public class Participant {
     public void setRole(String role) {
         this.role = role;
     }
+
+    /*public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }*/
+
 
     public int getStartupId() {
         return startupId;

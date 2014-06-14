@@ -13,6 +13,7 @@ public class User {
     int id;
     String firstName;
     String secondName;
+    String email;
     Date birthdate;
     int majorID;
     int facultyID;
@@ -23,11 +24,14 @@ public class User {
     Date registrationDate;
     Date validSince;
     int score;
+    ArrayList <User> guarantors;
+    boolean isValid;
 
-    public User(int id, String firstName, String secondName, Date birthdate,
+    public User(int id, String email, String firstName, String secondName, Date birthdate,
             int majorID, int facultyID,
             int profileState, String password, Date registrationDate) {
         this.id = id;
+        this.email = email;
         this.firstName = firstName;
         this.secondName = secondName;
         this.birthdate = birthdate;
@@ -36,7 +40,25 @@ public class User {
         this.profileState = profileState;
         this.password = password;
         this.registrationDate = registrationDate;
+        this.guarantors = new ArrayList<User>();
+        this.isValid = false;
     }
+
+    void addGuarantor(User user){
+        if (this.guarantors.size()<=2)
+        {
+            this.guarantors.add(user);
+            if (this.guarantors.size()==3)
+                this.isValid = true;
+        }
+        else return;
+    }
+
+    boolean isValid(){ return this.isValid;}
+
+    public String getEmail() {return  email;}
+
+    public void setEmail(String email) {this.email = email;}
 
     public int getAvatarID() {
         return avatarID;

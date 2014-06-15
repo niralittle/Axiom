@@ -14,6 +14,15 @@ public class User {
     int id;
     String firstName;
     String lastName;
+    String login;
+
+    public List<Integer> getConfirmers() {
+        return confirmers;
+    }
+
+    public String getLogin() {
+        return login;
+    }
     String email;
     Date birthdate;
     int majorID;
@@ -55,11 +64,7 @@ public class User {
     public void setConfirmers(List<Integer> c) {
         this.confirmers = c;
     }
-
-    public List getConfirmers() {
-        return confirmers;
-    }
-
+ 
     boolean isValid() {
         return this.confirmers.size() == 3;
     }
@@ -174,6 +179,10 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
     
 }

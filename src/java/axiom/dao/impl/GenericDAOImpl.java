@@ -30,7 +30,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     private static Logger logger = Logger.getLogger(DBManager.class.getName());
     
     @SuppressWarnings("unchecked")
-	public GenericDAOImpl(DBManager dbManager) {
+    public GenericDAOImpl(DBManager dbManager) {
         this.dbManager = dbManager;
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
@@ -44,7 +44,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
      * @return the number of records meeting the criteria
      */
     @Override
-    public long countAll(Map<String, Object> params) throws DBManagerException {
+    public final long countAll(Map<String, Object> params) throws DBManagerException {
     	if (params == null) {
     		throw new DBManagerException("Passed parameter <params> is null."
     				+ " Can't proccess null reference!");
@@ -99,7 +99,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
      * @return the number of records meeting the criteria
      */
     @Override
-    public long countAllWithLikeCause(Map<String, Object> params)
+    public final long countAllWithLikeCause(Map<String, Object> params)
             throws DBManagerException {
     	if (params == null) {
             throw new DBManagerException("Passed parameter <params> is null."
@@ -151,7 +151,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
      * @return Primary Key of created instance
      */
     @Override
-    public Object add(T t) throws DBManagerException {
+    public final Object add(T t) throws DBManagerException {
     	StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ").append(type.getSimpleName()).append('(');
         Map<String, Object> fields = getFieldsList(t);
@@ -196,7 +196,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
      * @param id id of entity instance
      */
     @Override
-    public void delete(Object id) throws DBManagerException {
+    public final void delete(Object id) throws DBManagerException {
     	Statement statement = null;
         try {
             if (id instanceof Number) {
@@ -226,7 +226,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
      * @return instance of entity found
      */
     @Override
-    public T find(Object id) throws DBManagerException {
+    public final T find(Object id) throws DBManagerException {
         if (!(id instanceof Number)) {
             throw new DBManagerException("Wrong primary key type!");
         }
@@ -301,7 +301,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
      * @param t instance of entity to update in DB
      */
     @Override
-    public void update(T t) throws DBManagerException {
+    public final void update(T t) throws DBManagerException {
         Object id;
         try {
             id = type.getMethod("getId").invoke(t);

@@ -1,6 +1,8 @@
 package axiom.dbmanager;
 
 
+import java.sql.Array;
+import java.sql.Blob;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,6 +69,15 @@ public class ResultIterator {
     public float getFloat(String columnName) throws DBManagerException {
         try {
             return rs.getFloat(columnName);
+        } catch (SQLException exc) {
+        	logger.error(exc.getMessage(), exc);
+            throw new DBManagerException("SQL exception", exc);
+        }
+    }
+
+    public Array getArray(String columnName) throws DBManagerException {
+        try {
+            return rs.getArray(columnName);
         } catch (SQLException exc) {
         	logger.error(exc.getMessage(), exc);
             throw new DBManagerException("SQL exception", exc);
@@ -148,6 +159,15 @@ public class ResultIterator {
     public long getLong(int columnNumber) throws DBManagerException {
         try {
             return rs.getLong(columnNumber);
+        } catch (SQLException exc) {
+        	logger.error(exc.getMessage(), exc);
+            throw new DBManagerException("SQL exception", exc);
+        }
+    }
+
+    public Blob getBlob(String columnName) throws DBManagerException {
+        try {
+            return rs.getBlob(columnName);
         } catch (SQLException exc) {
         	logger.error(exc.getMessage(), exc);
             throw new DBManagerException("SQL exception", exc);

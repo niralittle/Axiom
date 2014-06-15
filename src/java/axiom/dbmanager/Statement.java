@@ -1,6 +1,9 @@
 package axiom.dbmanager;
 
+import java.io.ByteArrayInputStream;
 import java.io.Closeable;
+import java.sql.Array;
+import java.sql.Blob;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -124,6 +127,34 @@ public class Statement implements Closeable {
     public void setLong(int parameterIndex, long value) throws DBManagerException {
         try {
             this.prStatement.setLong(parameterIndex, value);
+        } catch (SQLException exc) {
+            logger.error(exc.getMessage(), exc);
+            throw new DBManagerException("SQL Exception", exc);
+        }
+    }
+
+    public void setBinaryStream(int i, ByteArrayInputStream value, int length)
+            throws DBManagerException {
+        try {
+            this.prStatement.setBinaryStream(i, value);
+        } catch (SQLException exc) {
+            logger.error(exc.getMessage(), exc);
+            throw new DBManagerException("SQL Exception", exc);
+        }
+    }
+
+    public void setArray(int i, Array data) throws DBManagerException {
+        try {
+            this.prStatement.setArray(i, data);
+        } catch (SQLException exc) {
+            logger.error(exc.getMessage(), exc);
+            throw new DBManagerException("SQL Exception", exc);
+        }
+    }
+
+    public void setBlob(int i, Blob image) throws DBManagerException {
+        try {
+            this.prStatement.setBlob(i, image);
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
             throw new DBManagerException("SQL Exception", exc);

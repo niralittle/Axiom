@@ -8,6 +8,9 @@ public class ProjectType {
     int id;
     String discription;
 
+    public ProjectType() {
+    }
+
     public ProjectType(int id, String discription) {
         this.id = id;
         this.discription = discription;
@@ -17,12 +20,15 @@ public class ProjectType {
         return discription;
     }
 
-    public void setDiscription(String discription) {
+    public void setDescription(String discription) {
         this.discription = discription;
     }
 
     public int getId() {
         return id;
+    }
+    public void setId(int id){
+        this.id = id;
     }
 
 

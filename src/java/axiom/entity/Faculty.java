@@ -14,6 +14,10 @@ public class Faculty {
         this.name = name;
     }
 
+    public Faculty() {
+        
+    }
+
     public int getId() {
         return id;
     }
@@ -26,6 +30,9 @@ public class Faculty {
         this.name = name;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
 }

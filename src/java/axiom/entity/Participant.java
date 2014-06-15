@@ -19,6 +19,10 @@ public class Participant {
         //this.state = state;
     }
 
+    public Participant() {
+        
+    }
+
     public String getRole() {
         return role;
     }

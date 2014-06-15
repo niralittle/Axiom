@@ -1,7 +1,8 @@
 package axiom.entity;
 
 import java.util.ArrayList;
-import sun.util.calendar.LocalGregorianCalendar.Date;
+import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -12,7 +13,7 @@ public class User {
 
     int id;
     String firstName;
-    String secondName;
+    String lastName;
     String email;
     Date birthdate;
     int majorID;
@@ -24,8 +25,7 @@ public class User {
     Date registrationDate;
     Date validSince;
     int score;
-    ArrayList <User> guarantors;
-    boolean isValid;
+    List<Integer> confirmers;
 
     public User(int id, String email, String firstName, String secondName, Date birthdate,
             int majorID, int facultyID,
@@ -33,32 +33,44 @@ public class User {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.lastName = secondName;
         this.birthdate = birthdate;
         this.majorID = majorID;
         this.facultyID = facultyID;
         this.profileState = profileState;
         this.password = password;
         this.registrationDate = registrationDate;
-        this.guarantors = new ArrayList<User>();
-        this.isValid = false;
+        this.confirmers = new ArrayList<Integer>();
+     }
+
+    public User() {
     }
 
-    void addGuarantor(User user){
-        if (this.guarantors.size()<=2)
-        {
-            this.guarantors.add(user);
-            if (this.guarantors.size()==3)
-                this.isValid = true;
+    void addCofirmer(int userID){
+        if (this.confirmers.size() < 3) {
+            this.confirmers.add(userID);
         }
         else return;
     }
+    public void setConfirmers(List<Integer> c) {
+        this.confirmers = c;
+    }
 
-    boolean isValid(){ return this.isValid;}
+    public List getConfirmers() {
+        return confirmers;
+    }
 
-    public String getEmail() {return  email;}
+    boolean isValid() {
+        return this.confirmers.size() == 3;
+    }
 
-    public void setEmail(String email) {this.email = email;}
+    public String getEmail() {
+        return  email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getAvatarID() {
         return avatarID;
@@ -136,12 +148,12 @@ public class User {
         this.score = score;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String secondName) {
+        this.lastName = secondName;
     }
 
     public String getStatus() {
@@ -160,7 +172,8 @@ public class User {
         this.validSince = validSince;
     }
 
-
-
+    public void setId(int id) {
+        this.id = id;
+    }
     
 }

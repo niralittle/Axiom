@@ -14,6 +14,9 @@ public class StartupState {
         this.description = description;
     }
 
+    public StartupState() { 
+    }
+
     public String getDescription() {
         return description;
     }
@@ -24,6 +27,10 @@ public class StartupState {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+         this.id = id;
     }
 
 

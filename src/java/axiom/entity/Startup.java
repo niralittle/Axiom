@@ -23,6 +23,9 @@ public class Startup {
         this.startupStateID = startupStateID;
     }
 
+    public Startup() { 
+    }
+
     public String getDescription() {
         return description;
     }
@@ -65,5 +68,9 @@ public class Startup {
 
     public void setStartupStateID(int startupStateID) {
         this.startupStateID = startupStateID;
+    }
+
+    public void setId(int aInt) {
+        this.id = id;
     }
 }

@@ -4,13 +4,17 @@ package axiom.entity;
  *
  * @author user
  */
-public class Profilestate {
+public class ProfileState {
     int id;
     String description;
 
-    public Profilestate(int id, String description) {
+    public ProfileState(int id, String description) {
         this.id = id;
         this.description = description;
+    }
+
+    public ProfileState() {
+        
     }
 
     public String getDescription() {
@@ -23,6 +27,10 @@ public class Profilestate {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 

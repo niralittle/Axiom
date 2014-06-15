@@ -2,22 +2,64 @@ package axiom.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import sun.util.calendar.LocalGregorianCalendar.Date;
-import axiom.entity.Skill;
+import java.sql.Date;
 
-public class Vacancy{
+public class Vacancy {
+
     Date date;
-    int startupId;
+    int startupID;
+    String name;
+    int id;
+    String description;
     ArrayList<Skill> skills;
-    boolean free;
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setStartupID(int startupId) {
+        this.startupID = startupId;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    } 
+
+    public Vacancy() { 
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(ArrayList<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Vacancy(Date date, int startupId, Skill skill) {
         this.date = date;
-        this.startupId = startupId;
+        this.startupID = startupId;
         this.skills = new ArrayList<Skill>();
         this.skills.add(skill);
-        this.free = true;
     }
 
     public List<Skill> getSkillsId() {
@@ -25,7 +67,7 @@ public class Vacancy{
     }
 
     public int getStartupId() {
-        return startupId;
+        return startupID;
     }
 
     public void addSkill(Skill skill)
@@ -37,7 +79,4 @@ public class Vacancy{
         return date;
     }
 
-    boolean isFree() {return this.free;}
-
-    void Vacancy(){this.free = false;}
 }

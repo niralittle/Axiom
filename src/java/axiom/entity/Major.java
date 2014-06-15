@@ -15,6 +15,9 @@ public class Major {
         this.facultyId = facultyId;
     }
 
+    public Major() { 
+    }
+
     public int getFacultyId() {
         return facultyId;
     }

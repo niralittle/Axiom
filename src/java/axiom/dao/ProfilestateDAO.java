@@ -1,6 +1,6 @@
 package axiom.dao;
 
-import axiom.entity.Profilestate;
+import axiom.entity.ProfileState;
 import java.util.List;
 import axiom.dbmanager.DBManagerException;
 
@@ -8,11 +8,10 @@ import axiom.dbmanager.DBManagerException;
  *
  * @author user
  */
-public interface ProfilestateDAO extends GenericDAO {
+public interface ProfileStateDAO extends GenericDAO<ProfileState> {
 
-    public List<Profilestate> getAllProfilestates() throws DBManagerException;
+    public List<ProfileState> getAllProfileStates() throws DBManagerException;
 
-    public Profilestate getProfilestateById() throws DBManagerException;
-
-    public Profilestate getProfilestateByDescription(String description) throws DBManagerException;
+    public ProfileState getProfilestateByDescription(String description)
+            throws DBManagerException;
 }

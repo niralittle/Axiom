@@ -9,10 +9,11 @@ import axiom.dbmanager.DBManagerException;
  * @author Nira
  */
 
-public interface FacultyDAO extends GenericDAO {
+public interface FacultyDAO extends GenericDAO<Faculty> {
 
     public Faculty getFacultyByName(String name) throws DBManagerException;
 
-    public List<Faculty> getAllFaculty() throws DBManagerException;
+    public List<Faculty> getAllFaculties(int offset, int numberOfRecords)
+            throws DBManagerException;
 
 }

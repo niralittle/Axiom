@@ -11,8 +11,7 @@ public interface StartupStateDAO extends GenericDAO<StartupState>{
 
     public List<StartupState> getAllStartupStates() throws DBManagerException;
 
-    public StartupState getStartupStateById() throws DBManagerException;
-
-    public StartupState getStartupStateByDescription(String description) throws DBManagerException;
+    public StartupState getStartupStateByDescription(String description)
+            throws DBManagerException;
 
 }

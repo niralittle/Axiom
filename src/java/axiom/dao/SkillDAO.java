@@ -1,8 +1,8 @@
 package axiom.dao;
 
 import axiom.entity.Skill;
-import axiom.entity.User;
 import java.util.List;
+import java.util.Map;
 import axiom.dbmanager.DBManagerException;
 
 /**
@@ -11,8 +11,12 @@ import axiom.dbmanager.DBManagerException;
  */
 public interface SkillDAO extends GenericDAO<Skill> {
 
-    public List<Skill> getAllSkill() throws DBManagerException;
+    public List<Skill> getAllSkills(int offset,
+            int numberOfRecords) throws DBManagerException;
+    
+    public Map<String, String> getUserSkills(int userID, int offset,
+            int numberOfRecords) throws DBManagerException;
 
-    public List<Skill> getUserSkill(User user) throws DBManagerException;
+    public int getSkillIDByName(String name) throws DBManagerException;
 
 }

@@ -12,12 +12,7 @@ public interface MajorDAO extends GenericDAO<Major> {
 
     public Major getMajorByName(String name) throws DBManagerException;
 
-    public List<Major> getAllMajors () throws DBManagerException;
-
-    public List<Major> getMajorByFaculty(int facultyId) throws DBManagerException;
-
-    void deleteMajor(Major major)throws DBManagerException;
-
-    
+    public List<Major> getAllMajors(int offset, int numberOfRecords)
+            throws DBManagerException;
 
 }

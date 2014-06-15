@@ -4,11 +4,21 @@ package axiom.states;
  *
  * @author Nira
  */
-public class ProfileState {
+public enum ProfileState {
+    READONLY(1),
+    ACTIVE(2),
+    BLOCKED(3);
 
-    String stateName;
-    int stateId;
+    private final int state;
 
-    int [] confirmedByUsers;  //user IDs of those who confirmed profile as valid
-    
+    ProfileState(int state) {
+        this.state = state;
+    }
+    /**
+     * Returns state id
+     * @return id
+     */
+    public int toInt() {
+        return state;
+    }
 }

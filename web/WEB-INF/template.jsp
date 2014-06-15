@@ -9,12 +9,12 @@
 
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"> 
     <meta http-equiv="content-type" content="text/html; charset=windows-1251"/>
     <title><%=request.getParameter("title")%> | Axiom</title>
     <link rel="icon" href="assets/favicon.ico"/>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/main.css">
     <script type="text/javascript" src="jquery.js"></script>
 </head>
 
@@ -27,7 +27,9 @@
     <h2 id="title"><%=request.getParameter("title")%></h2>
 
     <div class="content">
+        <br>
         <% pageContext.include("/WEB-INF/contents/" + request.getParameter("content") + ".jsp");%>
+        <br>
     </div>
 
     <div class="footer">

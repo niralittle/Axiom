@@ -1,0 +1,117 @@
+/* 
+    Document   : main
+    Created on : 15 черв 2014, 22:43:46
+    Author     : Nira
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#page {
+    background-color: #FFFAFA;
+    width: 700px;
+    min-height: 300px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.whois {
+    width: 100%;
+    margin-left: auto 0;
+    margin-right: auto 0;
+    padding: 15px;
+}
+.avatar {
+    max-width: 200px;
+    border-radius: 48%;
+    border: 4px solid #CAD958;
+    -webkit-transition: border-radius 0.3s ease-in-out 0s;
+    -moz-transition: border-radius 0.3s ease-in-out 0s;
+    -ms-transition: border-radius 0.3s ease-in-out 0s;
+    transition: border-radius 0.3s ease-in-out 0s;
+}v
+.content {
+    min-height: 100px;
+}
+.name {
+    color: #000;
+
+    width: 500px;
+    font-weight: 400;
+    font-size: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 0 0 0;
+    text-shadow: 0 0 0.2em white
+}
+.wall {
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+.footer {
+    width: 100%;
+    float: bottom;
+}
+
+/*----- Tabs -----*/
+.tabs {
+    width:98%;
+    display:inline-block;
+}
+
+/*----- Tab Links -----*/
+
+/* Clearfix */
+.tab-links:after {
+    display:block;
+    clear:both;
+    content:'';
+}
+
+.tab-links li {
+    margin:0px 5px;
+    float:left;
+    list-style:none;
+}
+
+.tab-links a {
+    padding:9px 15px;
+    display:inline-block;
+    border-radius:3px 3px 0px 0px;
+    background:#7FB5DA;
+    font-size:16px;
+    font-weight:600;
+    color:#4c4c4c;
+    transition:all linear 0.15s;
+}
+
+.tab-links a:hover {
+    background:#a7cce5;
+    text-decoration:none;
+}
+
+li.active a, li.active a:hover {
+    background:#fff;
+    color:#4c4c4c;
+}
+
+/*----- Content of Tabs -----*/
+.tab-content {
+    padding:15px;
+    border-radius:3px;
+    box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+    background:#fff;
+}
+
+.tab {
+    display:none;
+}
+
+.tab.active {
+    display:block;
+}

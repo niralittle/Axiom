@@ -33,8 +33,8 @@
     -moz-transition: border-radius 0.3s ease-in-out 0s;
     -ms-transition: border-radius 0.3s ease-in-out 0s;
     transition: border-radius 0.3s ease-in-out 0s;
-}v
-.content {
+}
+.profile_content {
     min-height: 100px;
 }
 .name {

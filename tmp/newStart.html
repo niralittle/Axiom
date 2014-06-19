@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ANCI">
+    <meta http-equiv="content-type" content="text/html; charset=windows-1251"/>
+
+</head>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="main.css">
+<script type="text/javascript" src="jquery.js"></script>
+<body>
+<div id = "page">
+    <div class="header">
+        <div class="log"> <a href="index.html">Вийти</a></div>
+        <div class="menu"> 
+			<ul class="menu-links">
+                <li><a href="user.html">Профіль</a></li>
+				<li><a href="users.html">Люди</a></li>
+				<li><a href="startups.html">Проекти</a></li>
+                <li><a href="search.html">Пошук</a></li>
+                <li><a href="about.html">Про проект</a></li>
+            </ul>
+		</div>
+	</div>	
+    <div class="content">
+		<table width="90%" style="padding-left:15px;">
+			<tr>
+				<td width="30%">
+					<p>Назва</p>
+					<p>Опис</p>
+					<p>Тип проекту</p>
+				</td>
+				<td width="70%">
+					<p><input type="text" id="name" size="50%"></p>
+					<p><input type="text" id="description" size="50%"></p>
+					<p><select name="startupType" id="startuptype">
+						<option selected value="tAll">Будь-який</option>
+						<option value="t2">IT</option>
+						<option value="t2">Волонтерство</option>
+						<option value="t3">Мистецтво</option>
+						<option value="t4">Економіка</option>
+					</select></p>
+				</td>
+			</tr> 
+		</table>
+		<div class="newStart"><a href="startups.html">Створити проект</a></div>
+		
+
+    </div>
+	
+	
+	<div class="footer">
+        <div style="background-color: #CAD958; height: 20px; margin: 0 0 3px 0;"></div>
+        <div style="background-color: #58CAD9; height: 10px;"></div>
+		<div align="center" style="padding-top: 8px;"> НаУКМА, 2014</div>
+    </div>
+
+</div>
+
+</body>
+</html>

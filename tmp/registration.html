@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ANCI">
+    <meta http-equiv="content-type" content="text/html; charset=windows-1251"/>
+
+</head>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="main.css">
+<script type="text/javascript" src="jquery.js"></script>
+<body>
+<div id = "page">
+    <div class="header">
+        <div class="log"><a href="singin.html">Увійти</a> <a href="registration.html">Зареєструватись</a></div>
+        <div class="menu"> 
+			<ul class="menu-links">
+                <li><a href="index.html">На головну</a></li>
+                <li><a href="about.html">Про проект</a></li>
+            </ul>
+		</div>
+	</div>	
+    <div class="content">
+		<table width="90%" style="padding-left:15px;">
+			<tr>
+				<td width="30%">
+					<p>Ім'я</p>
+					<p>Прізвище</p>
+					<p>Пошта</p>
+					<p>Пароль</p>
+					<p>Повторіть пароль</p> 
+				</td>
+				<td width="70%">
+					<p><input type="text" id="firstname" size="50%"></p>
+					<p><input type="text" id="secondname" size="50%"></p>
+					<p><input type="text" id="email" size="50%"></p>
+					<p><input type="text" id="pass" size="50%"></p>
+					<p><input type="text" id="repass" size="50%"></p>
+
+				</td>
+			</tr> 
+		</table>
+				<div class="select-faculty" style="padding-left:15px;">
+					Факультет
+						<select name="faculty" id="faculty">
+							<option selected value="fALl">Усі</option>
+							<option value="f1">ФІ</option>
+							<option value="f2">ФСНСТ</option>
+							<option value="f3">ФПрН</option>
+							<option value="f4">ФПвн</option>
+							<option value="f5">ФЕН</option>
+							<option value="f6">ФГН</option>
+						</select>
+					</div>
+					</br>
+					<div class="select-major" style="padding-left:15px;">
+					Спеціальність
+						<select name="major" id="major">
+							<option selected value="mAll">Усі</option>
+							<option value="m1">Програмна інженерія</option>
+							<option value="m2">Прикладна математика</option>
+						</select>
+					</div>	
+					</br>
+					<div class="skills" style="padding-left:15px;">
+					Які ви маєте навички?</br>
+						<table>
+							<tr> 
+								<td width="33%"><input type="checkbox" id="skill1" value="s1">Skill1<Br>
+									<input type="checkbox" id="skill2" value="s2">Skill1<Br>
+									<input type="checkbox" id="skill3" value="s3">Skill1<Br><td>
+								<td width="33%"><input type="checkbox" id="skill4" value="s4">Skill1<Br>
+									<input type="checkbox" id="skill5" value="s5">Skill1<Br>
+									<input type="checkbox" id="skill6" value="s6">Skill1<Br><td>
+								<td width="33%"><input type="checkbox" id="skill7" value="s7">Skill1<Br>
+									<input type="checkbox" id="skill8" value="s8">Skill1<Br>
+									<input type="checkbox" id="skill9" value="s9">Skill1<Br><td>
+							</tr>
+						</table>
+					</div>
+					<div align="center" style="padding-top:15px;">
+					<input type="button" id="reg" value = "Зареєструватись" onmouseup = "Reg(this);">
+					</div>
+
+		
+		
+    </div>
+	
+	
+	<div class="footer">
+        <div style="background-color: #CAD958; height: 20px; margin: 0 0 3px 0;"></div>
+        <div style="background-color: #58CAD9; height: 10px;"></div>
+    </div>
+
+
+
+</div>
+
+
+</body>
+</html>

@@ -319,3 +319,7 @@ li.active a, li.active a:hover {
 	margin-bottom: 20px; 
 	margin-left: 15px;
 }
+.resultUser{
+	font-size=18px; 
+	font-weight=600;
+}

@@ -11,6 +11,12 @@
 	margin-bottom: 20px; 
 	margin-left: 15px;
 }
+#forStartup{
+	display: none; 
+	margin-top: 20px; 
+	margin-bottom: 20px; 
+	margin-left: 15px;
+}
 /*________Header_________*/
 /*_________Menu__________*/
 .menu{

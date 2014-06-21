@@ -9,6 +9,7 @@
     </property>
   </jsp-config>
   <locale-charset-info default-locale="">
+    <locale-charset-map locale="" charset=""/>
     <parameter-encoding default-charset="UTF-8"/>
   </locale-charset-info>
 </sun-web-app>

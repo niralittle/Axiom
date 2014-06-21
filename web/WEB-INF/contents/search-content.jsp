@@ -57,12 +57,12 @@ boolean isUser=true;
                     <input type="text" id="name" size="90%">
                     <input type="button" value = "Пошук" onmouseup = "Find(this);">
             </div>
-        <%name = request.getAttribute("name").toString();%>
+        <%name = (String)request.getAttribute("name");%>
             <div class="radio-button">
                     <input type="radio" checked name="kind" value="user" id="user" onclick="OnOff(this);"> User</input>
                     <input type="radio" name="kind" value="startup" id="startup" onclick = "OnOff(this);"> Startup</input>
             </div>
-            <% if (request.getAttribute("kind")=="startup") isUser=false;%>
+        <% if ("startup".equals(request.getAttribute("kind"))) isUser=false;%>
             <div class="between"></div>
 
             <div id="forUser">
@@ -74,10 +74,10 @@ boolean isUser=true;
                                     <%if ((faculties!=null) && !(faculties.isEmpty()))
                                       for (Integer key: faculties.keySet()){
                                           Faculty f = faculties.get(key);%>
-                                          <option value="<%f.getId();%>"><%f.getName();}%></option>
+                                          <option value="<%=f.getId()%>"><%=f.getName()%></option>
                             </select>
                     </div>
-                <%choosedfaculty = request.getAttribute("faculty").toString();%>
+                <%}choosedfaculty = (String)request.getAttribute("faculty");%>
                     </br>
                     <div class="select-major">
                     Спеціальність
@@ -86,10 +86,10 @@ boolean isUser=true;
                                     <%if ((majors!=null) && !(majors.isEmpty()))
                                       for (Integer key: majors.keySet()){
                                           Major m = majors.get(key);%>
-                                          <option value="<%m.getId();%>"><%m.getName();}%></option>
+                                          <option value="<%=m.getId()%>"><%=m.getName()%></option>
                             </select>
                     </div>
-                    <%choosedmajor = request.getAttribute("major").toString();%>
+                    <%}choosedmajor = (String)request.getAttribute("major");%>
                     </br>
                     <div class="skills">
                     Необхідні вміння:</br>
@@ -98,19 +98,19 @@ boolean isUser=true;
                             <%if (skills!=null && !skills.isEmpty())
                                 for (Integer key = 0; key<skills.size(); key+=3){
                                     Skill s = skills.get(key);%>
-                       <tr> <td width="33%"><input type="checkbox" id="<%s.getId();%>" value="<%s.getName();%>"><Br>
+                       <tr> <td width="33%"><input type="checkbox" id="<%=s.getId()%>" value="<%=s.getName()%>"><Br>
                             </td>
                             <%++key;
                               if (key<skills.size())s = skills.get(key);
                               else break;
                             %>
-                            <td width="33%"><input type="checkbox" id="<%s.getId();%>" value="<%s.getName();%>"><Br>
+                            <td width="33%"><input type="checkbox" id="<%=s.getId()%>" value="<%=s.getName()%>"><Br>
                             </td>
                             <%++key;
                               if (key<skills.size())s = skills.get(key);
                               else break;
                             %>
-                            <td width="33%"><input type="checkbox" id="<%s.getId();%>" value="<%s.getName();%>"><Br>
+                            <td width="33%"><input type="checkbox" id="<%=s.getId()%>" value="<%=s.getName()%>"><Br>
                             </td>
                        </tr><%}%>
                     </table>
@@ -120,27 +120,27 @@ boolean isUser=true;
             <div id="forStartup">
                     <div class="select-type">
                     Тип проекту
-                            <select name="startupType" id="startuptype">
+                            <select name="startupType" id="startupType">
                                     <option selected value="0">Будь-який</option>
                                     <%if ((projectTypes!=null) && !(projectTypes.isEmpty()))
                                       for (Integer key: projectTypes.keySet()){
                                           ProjectType p = projectTypes.get(key);%>
-                                          <option value="<%p.getId();%>"><%p.getDiscription();}%></option>
+                                          <option value="<%=p.getId()%>"><%=p.getDiscription()%></option>
                             </select>
                     </div>
-                 <%choosedstartuptype = request.getAttribute("startuptype").toString();%>
+                 <%}choosedstartuptype = (String)request.getAttribute("startuptype");%>
                     </br>
                     <div class="select-state">
                     Стан проекту
-                            <select name="state" id="startupstate">
+                            <select name="startupState" id="startupState">
                                     <option selected value="0">Будь-який</option>
                                     <%if (startupstates!=null && !startupstates.isEmpty())
                                         for (Integer key: startupstates.keySet() ){
                                             StartupState ss = startupstates.get(key);%>
-                                            <option value="<%ss.getId();%>"><%ss.getDescription();}%></option>
+                                            <option value="<%=ss.getId()%>"><%=ss.getDescription()%></option>
                             </select>
                     </div>
-                 <%choosedstartupstate = request.getAttribute("startupstate").toString();%>
+                 <%}choosedstartupstate = (String)request.getAttribute("startupstate");%>
             </div>
 
 
@@ -155,17 +155,17 @@ boolean isUser=true;
               <ul class="result-links">
                <% for (Integer key: users.keySet())
                    { User u = users.get(key);
-                     String userName = u.getFirstName()+" "+u.getLastName();%>
-                    <li> <div class="resultUser"><%userName;}}%></div> </br>
+                     String userName = ((String)u.getFirstName()+" "+(String)u.getLastName());%>
+                    <li> <div class="resultUser"><%=userName%></div> </br>
                             <a href="user.html">Детальніше...</a>
                     </li>
               </ul>
-         <%else {%>
+         <%}}else {%>
           if (startups!=null && !startups.isEmpty())%>
               <ul class="result-links">
                <% for (Integer key: startups.keySet())
                    { Startup s = startups.get(key);%>
-                    <li> <div class="resultUser"><%s.getName();%></div> </br>
+                    <li> <div class="resultUser"><%=s.getName()%></div> </br>
                         <%s.getDescription();}}%>
                             <a href="user.html">Детальніше...</a>
                     </li>

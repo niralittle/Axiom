@@ -8,4 +8,7 @@
       <description>Keep a copy of the generated servlet class' java code.</description>
     </property>
   </jsp-config>
+  <locale-charset-info default-locale="">
+    <parameter-encoding default-charset="UTF-8"/>
+  </locale-charset-info>
 </sun-web-app>

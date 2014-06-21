@@ -7,6 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:include page="/WEB-INF/template.jsp">
-	<jsp:param name="content" value="main-content"/>
+	<jsp:param name="content" value="index-content"/>
 	<jsp:param name="title" value="Головна"/>
 </jsp:include>

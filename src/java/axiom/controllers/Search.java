@@ -6,156 +6,39 @@ package axiom.controllers;
  */
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import axiom.dao.UserDAO;
 import axiom.dao.StartupDAO;
+import axiom.dao.VacancyDAO;
 import axiom.dao.impl.UserDAOImpl;
 import axiom.dao.impl.StartupDAOImpl;
-import axiom.dao.FacultyDAO;
-import axiom.dao.MajorDAO;
-import axiom.dao.impl.FacultyDAOImpl;
-import axiom.dao.impl.MajorDAOImpl;
-import axiom.dao.StartupStateDAO;
-import axiom.dao.ProjectTypeDAO;
-import axiom.dao.impl.StartupStateDAOImpl;
-import axiom.dao.impl.ProjectTypeDAOImpl;
-import axiom.dao.SkillDAO;
-import axiom.dao.impl.SkillDAOImpl;
+import axiom.dao.impl.VacancyDAOImpl;
 
 import axiom.dbmanager.DBManager;
 import axiom.dbmanager.DBManagerException;
 
 import axiom.entity.User;
 import axiom.entity.Startup;
-import axiom.entity.Faculty;
-import axiom.entity.Major;
-import axiom.entity.Skill;
-import axiom.entity.StartupState;
-import axiom.entity.ProjectType;
+import axiom.entity.Vacancy;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 
 
-public class Search extends HttpServlet {
+public class Search extends Controller {
 
     static private final int numbOfRecords = 10;
     static int offset = 0;
     private DBManager dbManager = null;
 
-     @Override
-    protected void doGet(HttpServletRequest request,
-        HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("text/html;charset=UTF-8");
-        Map <Integer, Startup> startups = null;
-        Map <Integer, User> users = null;
-
-        int page = 1;
-        String pageAttr = request.getParameter("page");
-        try {
-            page = (pageAttr == null) ? 1 : Integer.parseInt(pageAttr);
-        } catch (NumberFormatException ex) {
-            page = 1;
-        }
-
-        try{
-            FacultyDAO fDAO = new FacultyDAOImpl(dbManager);
-            List<Faculty> faculties = fDAO.getAllFaculties(0,10);
-
-            MajorDAO mDAO = new MajorDAOImpl(dbManager);
-            List<Major> majors = mDAO.getAllMajors(0,10);
-
-            ProjectTypeDAO ptDAO = new ProjectTypeDAOImpl(dbManager);
-            List<ProjectType> projectTypes = ptDAO.getAllProjectTypes();
-
-            StartupStateDAO ssDAO = new StartupStateDAOImpl(dbManager);
-            List<StartupState> startupstates = ssDAO.getAllStartupStates();
-
-            SkillDAO sDAO = new SkillDAOImpl(dbManager);
-            List<Skill> skills = sDAO.getAllSkills(0, 9);
-
-
-            if ("user".equals(request.getAttribute("kind"))){
-                users = new HashMap <Integer, User>();
-                String name = (String)request.getAttribute("name");
-                String facultyAttr = (String) request.getAttribute("faculty");
-                int facultyId = (facultyAttr == null)? 0 : Integer.parseInt(facultyAttr);
-                String majorAttr = (String) request.getAttribute("major");
-                int majorId = (majorAttr == null)? 0 : Integer.parseInt(majorAttr);
-                if (name != null) 
-                    users = userListToMap(seekUserByName(name));
-                else{
-                    if (majorId>0)
-                       users = userListToMap(seekUserByMajor(majorId));
-                    else
-                       if (facultyId>0)
-                          users = userListToMap(seekUserByFaculty(facultyId));
-                    }
-                 request.setAttribute("users", users);
-
-            }
-            else{
-                startups = new HashMap <Integer, Startup>();
-                String name = (String)request.getAttribute("name");
-                String typeAttr = (String) request.getAttribute("startupType");
-                int typeId = (typeAttr == null)? 0 : Integer.parseInt(typeAttr);
-                String stateAttr = (String) request.getAttribute("startupState");
-                int stateId = (stateAttr == null)? 0 : Integer.parseInt(stateAttr);
-                if (name != null)
-                    startups = startupListToMap(seekStartupByName(name));
-                else {
-                    if (stateId>0)
-                        startups = startupListToMap(seekStartupByState(stateId));
-                    else
-                        if (typeId>0)
-                                startups = startupListToMap(seekStartupByType(typeId));
-                    }
-                request.setAttribute("startups", startups);
-            }
-
-        }catch(DBManagerException dbmEx)
-        {
-           // dbManager.rollback();
-        }
-        finally
-        {
-            dbManager.close();
-        }
-
+    public void searchContent(int page) throws IOException {
+        offset = page*numbOfRecords;
 
      }
-
-   private HashMap<Integer, User> userListToMap (List<User> users){
-       HashMap<Integer, User> usersMap = new HashMap<Integer, User>();
-       int i = 0;
-       for(User u:users){
-           usersMap.put(i, u);
-           ++i;
-       }
-       return usersMap;
-   }
-
-   private HashMap<Integer, Startup> startupListToMap (List<Startup> starts){
-       HashMap<Integer, Startup> startsMap = new HashMap<Integer, Startup>();
-       int i = 0;
-       for(Startup s:starts){
-           startsMap.put(i, s);
-           ++i;
-       }
-       return startsMap;
-   }
 
    public List<User> seekUserByName(String name) throws DBManagerException {
         List<User> users = new ArrayList<User>();
         UserDAO userDAO = null;
+
         try {
             userDAO = new UserDAOImpl(dbManager);
             String firstName = name;
@@ -235,6 +118,24 @@ public class Search extends HttpServlet {
         return starts;
     }
 
+   public List<Startup> seekStartupByType(int projectTypeId) throws DBManagerException {
+        List<Startup> starts = new ArrayList<Startup>();
+        StartupDAO StartupDAO = null;
+        try {
+            dbManager = new DBManager();
+            StartupDAO = new StartupDAOImpl(dbManager);
+            starts = StartupDAO.getStartupsByProjectType(projectTypeId, offset, numbOfRecords);
+        }
+        catch(DBManagerException exc) {
+            dbManager.rollback();
+            throw new DBManagerException(exc.getMessage());
+        }
+        finally {
+            dbManager.close();
+        }
+        return starts;
+    }
+
 
    public List<Startup> seekStartupByState(int startupStateId) throws DBManagerException {
         List<Startup> starts = new ArrayList<Startup>();
@@ -253,15 +154,14 @@ public class Search extends HttpServlet {
         }
         return starts;
     }
-
-
-   public List<Startup> seekStartupByType(int projectTypeId) throws DBManagerException {
-        List<Startup> starts = new ArrayList<Startup>();
-        StartupDAO StartupDAO = null;
-        try {
+   
+   public List<Vacancy> seekVacancyBySkill(int skillId) throws DBManagerException{
+       List <Vacancy> vacancies = new ArrayList<Vacancy>();
+       VacancyDAO vacDAO = null;
+       try {
             dbManager = new DBManager();
-            StartupDAO = new StartupDAOImpl(dbManager);
-            starts = StartupDAO.getStartupsByProjectType(projectTypeId, offset, numbOfRecords);
+            vacDAO = new VacancyDAOImpl(dbManager);
+            vacancies = vacDAO.getVacanciesBySkill(skillId, offset, numbOfRecords);
         }
         catch(DBManagerException exc) {
             dbManager.rollback();
@@ -270,7 +170,45 @@ public class Search extends HttpServlet {
         finally {
             dbManager.close();
         }
-        return starts;
-    }
+       return vacancies;
+   
+   }
+
+   public List<Vacancy> seekVacancyByStartup(int startupId) throws DBManagerException{
+       List <Vacancy> vacancies = new ArrayList<Vacancy>();
+       VacancyDAO vacDAO = null;
+       try {
+            dbManager = new DBManager();
+            vacDAO = new VacancyDAOImpl(dbManager);
+            vacancies = vacDAO.getVacancyByStartup(startupId, offset, numbOfRecords);
+        }
+        catch(DBManagerException exc) {
+            dbManager.rollback();
+            throw new DBManagerException(exc.getMessage());
+        }
+        finally {
+            dbManager.close();
+        }
+        return vacancies;
+   }
+
+   public List<Vacancy> seekVacancyByName(String name) throws DBManagerException{
+       List <Vacancy> vacancies = new ArrayList<Vacancy>();
+       VacancyDAO vacDAO = null;
+       try {
+            dbManager = new DBManager();
+            vacDAO = new VacancyDAOImpl(dbManager);
+            vacancies.add(vacDAO.getVacancyByName(name));
+        }
+        catch(DBManagerException exc) {
+            dbManager.rollback();
+            throw new DBManagerException(exc.getMessage());
+        }
+        finally {
+            dbManager.close();
+        }
+       return vacancies;
+
+   }
 
 }

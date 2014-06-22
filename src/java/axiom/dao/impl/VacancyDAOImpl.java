@@ -107,4 +107,37 @@ public class VacancyDAOImpl extends GenericDAOImpl<Vacancy> implements VacancyDA
         return li;
     }
 
+    public Vacancy getVacancyByName(String name) throws DBManagerException {
+        if (name == null) {
+    		throw new DBManagerException("Passed parameter <name> is null or empty"
+    				+ " Can't proccess the request!");
+    	}
+    	Statement statement = null;
+    	Vacancy v;
+    	ResultIterator ri  = null;
+    	String query  = "SELECT * " +
+                        "FROM VACANCY v " +
+                        "WHERE v.name = ?";
+        try {
+            statement = dbManager.prepareStatement(query);
+            statement.setString(1, (name));
+            ri = statement.executeQuery();
+            v = new Vacancy();
+            v.setID(ri.getInt("id"));
+            v.setName(ri.getString("NAME"));
+            v.setDescription(ri.getString("DESCRIPTION"));
+            v.setDate(ri.getDate("CREATEDON"));
+            v.setStartupID(ri.getInt("STARTUPID"));
+        } catch (DBManagerException exc) {
+            throw new DBManagerException ("An error occured, " +
+                            "pleaase, contact an administrator");
+        } finally {
+            statement.close();
+        }
+        return v;
+    }
+
+
+
+
 }

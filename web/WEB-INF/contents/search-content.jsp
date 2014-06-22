@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="java.util.Map"%>
-<%@page import="java.util.List"%>
 <%@page import="axiom.entity.User"%>
 <%@page import="axiom.entity.Startup"%>
 <%@page import="axiom.entity.Faculty"%>
@@ -16,37 +15,14 @@
 <%@page import="axiom.entity.StartupState"%>
 <%@page import="axiom.entity.Skill"%>
 
-<%String name = request.getAttribute("name") !=null?
-    (String) request.getAttribute("name") : null;
-String choosedfaculty = request.getAttribute("faculty") !=null?
-    (String) request.getAttribute("faculty") : null;
-String choosedmajor = request.getAttribute("major") !=null?
-    (String) request.getAttribute("major") : null;
-String choosedstartuptype = request.getAttribute("startuptype") !=null?
-    (String) request.getAttribute("startuptype") : null;
-String choosedstartupstate = request.getAttribute("startupstate") !=null?
-    (String) request.getAttribute("startupstate") : null;
-Map <Integer,User>      users =
-         request.getAttribute("users") != null ?
-     (Map<Integer, User>) request.getAttribute("users") : null;
-Map <Integer,Startup> startups =
-         request.getAttribute("startups") != null ?
-     (Map<Integer, Startup>) request.getAttribute("startups") : null;
-Map <Integer,Faculty> faculties =
-         request.getAttribute("faculty") != null ?
-     (Map<Integer, Faculty>) request.getAttribute("faculty") : null;
-Map <Integer,Major> majors =
-         request.getAttribute("major") != null ?
-     (Map<Integer, Major>) request.getAttribute("major") : null;
-Map <Integer,ProjectType> projectTypes =
-         request.getAttribute("startuptype") != null ?
-     (Map<Integer, ProjectType>) request.getAttribute("startuptype") : null;
-Map <Integer,StartupState> startupstates =
-         request.getAttribute("startupstate") != null ?
-     (Map<Integer, StartupState>) request.getAttribute("startupstate") : null;
-Map <Integer,Skill> skills =
-         request.getAttribute("skills") != null ?
-     (Map<Integer, Skill>) request.getAttribute("skills") : null;
+<%
+Map <Integer,User> users = (Map<Integer, User>) request.getAttribute("users");
+Map <Integer,Startup> startups = (Map<Integer, Startup>) request.getAttribute("startups");
+Map <Integer,Faculty> faculties = (Map<Integer, Faculty>) request.getAttribute("faculty");
+Map <Integer,Major> majors = (Map<Integer, Major>) request.getAttribute("major");
+Map <Integer,ProjectType> projectTypes = (Map<Integer, ProjectType>) request.getAttribute("startuptype");
+Map <Integer,StartupState> startupstates = (Map<Integer, StartupState>) request.getAttribute("startupstate");
+Map <Integer,Skill> skills = (Map<Integer, Skill>) request.getAttribute("skills");
 
 boolean isUser=true;
 %>
@@ -57,7 +33,7 @@ boolean isUser=true;
                     <input type="text" id="name" size="90%">
                     <input type="button" value = "Пошук" onmouseup = "Find(this);">
             </div>
-        <%name = (String)request.getAttribute("name");%>
+        <%String name = (String)request.getAttribute("name");%>
             <div class="radio-button">
                     <input type="radio" checked name="kind" value="user" id="user" onclick="OnOff(this);"> User</input>
                     <input type="radio" name="kind" value="startup" id="startup" onclick = "OnOff(this);"> Startup</input>
@@ -77,7 +53,7 @@ boolean isUser=true;
                                           <option value="<%=f.getId()%>"><%=f.getName()%></option>
                             </select>
                     </div>
-                <%}choosedfaculty = (String)request.getAttribute("faculty");%>
+                <%}String choosedfaculty = (String)request.getAttribute("faculty");%>
                     </br>
                     <div class="select-major">
                     Спеціальність
@@ -89,7 +65,7 @@ boolean isUser=true;
                                           <option value="<%=m.getId()%>"><%=m.getName()%></option>
                             </select>
                     </div>
-                    <%}choosedmajor = (String)request.getAttribute("major");%>
+                    <%}String choosedmajor = (String)request.getAttribute("major");%>
                     </br>
                     <div class="skills">
                     Необхідні вміння:</br>
@@ -128,7 +104,7 @@ boolean isUser=true;
                                           <option value="<%=p.getId()%>"><%=p.getDiscription()%></option>
                             </select>
                     </div>
-                 <%}choosedstartuptype = (String)request.getAttribute("startuptype");%>
+                 <%}String choosedstartuptype = (String)request.getAttribute("startuptype");%>
                     </br>
                     <div class="select-state">
                     Стан проекту
@@ -140,7 +116,7 @@ boolean isUser=true;
                                             <option value="<%=ss.getId()%>"><%=ss.getDescription()%></option>
                             </select>
                     </div>
-                 <%}choosedstartupstate = (String)request.getAttribute("startupstate");%>
+                 <%}String choosedstartupstate = (String)request.getAttribute("startupstate");%>
             </div>
 
 

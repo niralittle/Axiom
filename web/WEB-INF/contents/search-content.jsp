@@ -26,7 +26,7 @@ String choosedstartuptype = request.getAttribute("startuptype") !=null?
     (String) request.getAttribute("startuptype") : null;
 String choosedstartupstate = request.getAttribute("startupstate") !=null?
     (String) request.getAttribute("startupstate") : null;
-Map <Integer,User> users =
+Map <Integer,User>      users =
          request.getAttribute("users") != null ?
      (Map<Integer, User>) request.getAttribute("users") : null;
 Map <Integer,Startup> startups =
@@ -151,7 +151,7 @@ boolean isUser=true;
     <div id="Result" style="display: none;">
     <div style="padding-left: 10px;">Результати пошуку</div>
         <%if (isUser)
-            { if (users!=null && !users.isEmpty())%>
+            { if (users!=null && !users.isEmpty()) {%>
               <ul class="result-links">
                <% for (Integer key: users.keySet())
                    { User u = users.get(key);
@@ -160,7 +160,7 @@ boolean isUser=true;
                             <a href="user.html">Детальніше...</a>
                     </li>
               </ul>
-         <%}}else {%>
+         <%}}}else {%>
           if (startups!=null && !startups.isEmpty())%>
               <ul class="result-links">
                <% for (Integer key: startups.keySet())

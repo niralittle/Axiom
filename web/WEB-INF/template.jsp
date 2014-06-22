@@ -15,7 +15,7 @@
     <link rel="icon" href="assets/favicon.ico"/>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="assets/main.css">
-    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="assets/jquery.js"></script>
 </head>
 
 <body>

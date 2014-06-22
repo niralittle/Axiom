@@ -91,6 +91,14 @@
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/deniedResource.jsp</location>
+    </error-page>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>jdbcAxiomRealm</realm-name>
@@ -111,6 +119,4 @@
     <security-role>
         <description/>
         <role-name>BLOCKED</role-name>
-    </security-role>
-
-</web-app>
+    </security-role></web-app>

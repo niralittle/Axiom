@@ -10,6 +10,7 @@
 	// Regex for validation inputed data
 	var email_check = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var login_check =/^[A-Za-z0-9_-]{3,40}$/;
+        var name_check =/^[А-яА-я]{3,40}$/;
 	var password_check = /^[A-Za-z0-9!@#$%^&*()_]{6,40}$/;
 
 	// value to return. If all data valid - all OK!
@@ -48,14 +49,14 @@
 		document.getElementById("passMsg").innerHTML = " ";
 	}
 
-	if (!login_check.test(lname.value)) {	
+	if (!name_check.test(lname.value)) {
 		document.getElementById("lnameMsg").innerHTML = "Щось не так із прізвищем.";
 		valid = false;
 	} else {
 		document.getElementById("lnameMsg").innerHTML = " ";
 	}
 
-	if (!login_check.test(fname.value)) {
+	if (!name_check.test(fname.value)) {
 		document.getElementById("fnameMsg").innerHTML = "Введіть правильне ім'я.";
 		valid = false;
 	} else {

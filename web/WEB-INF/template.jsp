@@ -33,6 +33,8 @@
                 <button type="submit" class="btn btn-primary" value="Login">Увійти</button>
             </form>
         </div>
+    <%  } else { %>
+        <button type="submit" action="Logout" class="btn btn-primary" value="Logout">Вийти</button>
     <%  } %>
          <div class="pages_list">
             <ul>

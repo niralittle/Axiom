@@ -129,13 +129,14 @@ public class SearchUser extends HttpServlet {
             Search searchContent = new Search();
             searchContent.searchContent(page);
             ArrayList users = new ArrayList <User>();
-            String name = (String)request.getAttribute("name");
+            String firstname = (String)request.getAttribute("firstname");
+            String lastname = (String)request.getAttribute("lastname");
             String facultyAttr = (String) request.getAttribute("faculty");
             int facultyId = (facultyAttr == null)? 0 : Integer.parseInt(facultyAttr);
             String majorAttr = (String) request.getAttribute("major");
             int majorId = (majorAttr == null)? 0 : Integer.parseInt(majorAttr);
-            if (name != null)
-                users = (ArrayList<User>)searchContent.seekUserByName(name);
+            if (firstname != null || lastname != null)
+                users = (ArrayList<User>)searchContent.seekUserByName(firstname, lastname);
             else{
                 if (majorId>0)
                    users = (ArrayList<User>)searchContent.seekUserByMajor(majorId);

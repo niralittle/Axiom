@@ -35,23 +35,14 @@ public class Search extends Controller {
 
      }
 
-   public List<User> seekUserByName(String name) throws DBManagerException {
+   public List<User> seekUserByName(String firstName, String lastName)
+           throws DBManagerException {
         List<User> users = new ArrayList<User>();
         UserDAO userDAO = null;
 
         try {
             userDAO = new UserDAOImpl(dbManager);
-            String firstName = name;
-            String lastName = null;
-            if (name.indexOf(" ")>0)
-            {
-                firstName.copyValueOf(name.toCharArray(), 0, name.indexOf(" "));
-                lastName.copyValueOf(name.toCharArray(), name.indexOf(" ")+1, name.length()-name.indexOf(" "));
-            }
-
             users = userDAO.getUsersByName(firstName, lastName, offset, numbOfRecords);
-            if (users.isEmpty())
-                users = userDAO.getUsersByName(lastName, firstName, offset, numbOfRecords);
         }
         catch(DBManagerException exc) {
             dbManager.rollback();

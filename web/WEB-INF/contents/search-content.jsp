@@ -71,7 +71,7 @@ boolean isUser=true;
                     <div class="skills">
                     Необхідні вміння:</br>
                     <table>
-             
+
                             <%if (skills!=null && !skills.isEmpty()) {
                                 for (int key = 0; key<skills.size(); key+=3){
                                     Skill s = skills.get(key);%>
@@ -141,9 +141,10 @@ boolean isUser=true;
               <ul class="result-links">
                <% for (Startup s: startups) {%>
                     <li> <div class="resultUser"><%=s.getName()%></div> </br>
-                        <%s.getDescription();}}%>
+                        <%=s.getDescription()%>
                             <a href="user.html">Детальніше...</a>
                     </li>
+                  <%}}%>
 
 
               </ul>

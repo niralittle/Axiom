@@ -111,8 +111,9 @@ List<Major> majors = (List<Major>) request.getAttribute("majors");
                     <select name="faculty" id="fac"
                        value="<%=request.getParameter("faculty") == null ?
                                                      "" : request.getParameter("faculty")%>">
-                    <% for (Faculty f : faculties) { %>
-                        <option value ="<%=f.getName()%>"><%=f.getName()%></option>
+                        <%
+                        for (Faculty f: faculties) { %>
+                        <option value ="<%=f.getId()%>"><%=f.getName()%></option>
                     <% } %>
                     </select>
                 </div>
@@ -138,7 +139,7 @@ List<Major> majors = (List<Major>) request.getAttribute("majors");
                         }
                         for (Major m : majors) {
                     %>
-                        <option value ="<%=m.getName()%>"><%=m.getName()%></option>
+                        <option value ="<%=m.getId()%>"><%=m.getName()%></option>
                     <%  } %>
                     </select>
                 </div>

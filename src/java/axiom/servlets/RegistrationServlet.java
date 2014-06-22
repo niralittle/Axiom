@@ -10,6 +10,7 @@ import axiom.dbmanager.DBManager;
 import axiom.dbmanager.DBManagerException;
 import java.io.IOException;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,11 +34,12 @@ public class RegistrationServlet extends HttpServlet {
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
             "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String LOGIN_PATTERN = "^[A-Za-z0-9_-]{3,40}$";
+   // private static final String NAME_PATTERN = "^[А-Яа-я]{3,40}$";
     private static final String PASSWORD_PATTERN = "^[A-Za-z0-9!@#$%^&*()_]{6,40}$";
     private static Logger logger = Logger.getLogger(RegistrationServlet.class.getName());
     // pages to redirect
     private static final String REGISTRATION_PAGE = "registration.jsp";
-    private static final String CONGRATULATION_PAGE = "User";
+    private static final String CONGRATULATION_PAGE = "index.jsp";
     //UserController credentials
     private String login;
     private String password;
@@ -70,27 +72,28 @@ public class RegistrationServlet extends HttpServlet {
                 redirectTo(REGISTRATION_PAGE, request, response);
             } else {
                 try {
-                    UserController userControl = null;
-                    userControl = new UserController();
-                    userControl.register(login, password, email, firstName,
+                    UserController userControl = new UserController();
+                    int check = userControl.register(login, password, email, firstName,
                                     lastName,faculty, major);
+                    System.out.println("Success! UserID = " + check);
                     redirectTo(CONGRATULATION_PAGE, request, response);
                 } catch (Exception e) {
-
+                    System.out.println("Something went wrong when trying " +
+                            "to create a new user");
                 } finally {
-
+                    
                 }
             }
         }
     }
 
-
-
     /**
      * Read inputted params from request scope.
      * @param request
      */
-    private void readParameters(HttpServletRequest request) {
+    private void readParameters(HttpServletRequest request)
+            throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
         login = request.getParameter("login");
         password = request.getParameter("password");
         passwordConf = request.getParameter("passwordConf");
@@ -136,17 +139,17 @@ public class RegistrationServlet extends HttpServlet {
             errMessage.append("- Логін має бути " +
          "не коротший від трьох символів, без пробілів та не більше 30 символів у довжину.<br />");
         }
-        matcher = pattern.matcher(lastName);
-        if (!matcher.matches()) {
-            isValid = false;
-            errMessage.append("- Прізвище повинно бути без пробілів.<br />");
-
-        }
-        matcher = pattern.matcher(firstName);
-        if (!matcher.matches()) {
-            isValid = false;
-            errMessage.append("- Введіть ім'я без пробілів.<br />");
-        }
+//        matcher = pattern.matcher(NAME_PATTERN);
+//        if (!matcher.matches()) {
+//            isValid = false;
+//            errMessage.append("- Прізвище повинно бути без пробілів.<br />");
+//
+//        }
+//        matcher = pattern.matcher(NAME_PATTERN);
+//        if (!matcher.matches()) {
+//            isValid = false;
+//            errMessage.append("- Введіть ім'я без пробілів.<br />");
+//        }
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
         if (!matcher.matches()) {

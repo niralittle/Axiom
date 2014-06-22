@@ -2,16 +2,23 @@ package axiom.servlets;
 
 import axiom.controllers.UserController;
 
+import axiom.dao.FacultyDAO;
+import axiom.dao.MajorDAO;
+import axiom.dao.impl.FacultyDAOImpl;
+import axiom.dao.impl.MajorDAOImpl;
 import axiom.dbmanager.DBManager;
+import axiom.dbmanager.DBManagerException;
 import java.io.IOException;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -162,8 +169,14 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        prepareDataForRegistrationPage();
-        response.sendRedirect("registration.jsp");
+        try {
+            prepareDataForRegistrationPage(request);
+        } catch (DBManagerException ex) {
+            java.util.logging.Logger.getLogger(RegistrationServlet.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        RequestDispatcher view = request.getRequestDispatcher("registration.jsp");
+        view.forward(request, response);
      }
 
     /**
@@ -191,14 +204,27 @@ public class RegistrationServlet extends HttpServlet {
                 "and executes it ('New' scenario workflow).";
     }// </editor-fold>
 
-    private void prepareDataForRegistrationPage()
-             throws IOException {
-//        try {
-//            DBManager dbManager = new DBManager();
-//        } catch () {
-////
-////        } finally {
-//
-//        }
+
+    private void prepareDataForRegistrationPage(HttpServletRequest req)
+             throws IOException, DBManagerException {
+         DBManager dbManager = null;
+         int offset = 0;
+         int numbOfRec = 100;
+        try {
+            dbManager = new DBManager();
+            FacultyDAO facDAO = new FacultyDAOImpl(dbManager);
+            MajorDAO majDAO = new MajorDAOImpl(dbManager);
+            List facs = facDAO.getAllFaculties(offset, numbOfRec);
+            List majors = majDAO.getAllMajors(offset, numbOfRec);
+            System.out.println("Retrieved data by DAO: ");
+            System.out.println("is empty: " + majors.isEmpty());
+            req.setAttribute("faculties", facs);
+            req.setAttribute("majors", majors);
+        } catch (DBManagerException ex) {
+            Logger.getLogger(RegistrationServlet.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        } finally {
+            dbManager.close();
+        }
     }
 }

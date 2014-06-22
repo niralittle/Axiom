@@ -56,10 +56,10 @@ public class FacultyDAOImpl extends GenericDAOImpl<Faculty> implements FacultyDA
     	Statement statement = null;
     	List<Faculty> facs = null;
     	ResultIterator ri  = null;
-    	String query  = "SELECT * FROM ( SELECT a.*, ROWNUM rnum FROM (" +
+    	String query  = "SELECT ID, NAME FROM ( SELECT a.*, ROWNUM rnum FROM (" +
                         "SELECT * " +
                         "FROM FACULTY f " +
-                        "ORDER BY f.name " +
+                        "ORDER BY f.id " +
                         " ) a where ROWNUM <= ? )" +
                         "WHERE rnum  > ?";
         try {

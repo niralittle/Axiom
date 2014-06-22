@@ -7,15 +7,14 @@ Author     : Nira
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="java.util.List"%>
+<%@page import="axiom.entity.Faculty"%>
+<%@page import="axiom.entity.Major"%>
 
 <script type="text/javascript" src="assets/registerValidator.js"></script>
 
 <%
-List<String> faculties = request.getAttribute("faculties") != null ?
-    (List<String>) request.getAttribute("faculties") : null;
-
-List<String> majors = request.getAttribute("majors") != null ?
-    (List<String>) request.getAttribute("majors") : null;
+List<Faculty> faculties = (List<Faculty>) request.getAttribute("faculties");
+List<Major> majors = (List<Major>) request.getAttribute("majors");
 %>
 
 <form name="Register" method="post" onsubmit="return validate()" action="Register">
@@ -104,15 +103,16 @@ List<String> majors = request.getAttribute("majors") != null ?
                 <div id="emailMsg"></div>
             </td>
         </tr>
+        <% if (faculties != null && !faculties.isEmpty()) { %>
         <tr>
             <td>
                 <div class="form-group" style="width: 300px;">
-                    <label for="lname">Факультет: </label>
+                    <label for="faculty">Факультет: </label>
                     <select name="faculty" id="fac"
                        value="<%=request.getParameter("faculty") == null ?
                                                      "" : request.getParameter("faculty")%>">
-                    <% for (String f : faculties) { %>
-                        <option value ="<%=f%>"><%=f%></option>
+                    <% for (Faculty f : faculties) { %>
+                        <option value ="<%=f.getName()%>"><%=f.getName()%></option>
                     <% } %>
                     </select>
                 </div>
@@ -121,10 +121,12 @@ List<String> majors = request.getAttribute("majors") != null ?
                 <div id="facMsg"></div>
             </td>
         </tr>
+        <% }
+           if (majors != null && !majors.isEmpty()) { %>
         <tr>
             <td>
                 <div class="form-group" style="width: 300px;">
-                    <label for="lname">Спеціальність: </label>
+                    <label for="major">Спеціальність: </label>
                     <select name="major" id="maj">
                     <%
                         String val = request.getParameter("major");
@@ -134,9 +136,9 @@ List<String> majors = request.getAttribute("majors") != null ?
 
                     <%
                         }
-                        for (String m : majors) {
+                        for (Major m : majors) {
                     %>
-                        <option value ="<%=m%>"><%=m%></option>
+                        <option value ="<%=m.getName()%>"><%=m.getName()%></option>
                     <%  } %>
                     </select>
                 </div>
@@ -145,6 +147,7 @@ List<String> majors = request.getAttribute("majors") != null ?
                 <div id="majMsg"></div>
             </td>
         </tr>
+        <% } %>
         <tr>
             <td>
                 <div class="form-group" style="width: 300px;">

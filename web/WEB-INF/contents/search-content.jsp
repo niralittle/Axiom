@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@page import="axiom.entity.User"%>
 <%@page import="axiom.entity.Startup"%>
 <%@page import="axiom.entity.Faculty"%>
@@ -16,13 +16,13 @@
 <%@page import="axiom.entity.Skill"%>
 
 <%
-Map <Integer,User> users = (Map<Integer, User>) request.getAttribute("users");
-Map <Integer,Startup> startups = (Map<Integer, Startup>) request.getAttribute("startups");
-Map <Integer,Faculty> faculties = (Map<Integer, Faculty>) request.getAttribute("faculty");
-Map <Integer,Major> majors = (Map<Integer, Major>) request.getAttribute("major");
-Map <Integer,ProjectType> projectTypes = (Map<Integer, ProjectType>) request.getAttribute("startuptype");
-Map <Integer,StartupState> startupstates = (Map<Integer, StartupState>) request.getAttribute("startupstate");
-Map <Integer,Skill> skills = (Map<Integer, Skill>) request.getAttribute("skills");
+    List<User> users = (List<User>) request.getAttribute("users");
+    List<Startup> startups = (List<Startup>) request.getAttribute("startups");
+    List<Faculty> faculties = (List<Faculty>) request.getAttribute("faculty");
+    List<Major> majors = (List<Major>) request.getAttribute("major");
+    List<ProjectType> projectTypes = (List<ProjectType>) request.getAttribute("startuptype");
+    List<StartupState> startupstates = (List<StartupState>) request.getAttribute("startupstate");
+    List<Skill> skills = (List<Skill>) request.getAttribute("skills");
 
 boolean isUser=true;
 %>
@@ -48,8 +48,7 @@ boolean isUser=true;
                             <select name="faculty" id="faculty">
                                     <option selected value="0">Усі</option>
                                     <%if ((faculties!=null) && !(faculties.isEmpty()))
-                                      for (Integer key: faculties.keySet()){
-                                          Faculty f = faculties.get(key);%>
+                                      for (Faculty f: faculties){%>
                                           <option value="<%=f.getId()%>"><%=f.getName()%></option>
                             </select>
                     </div>
@@ -60,8 +59,7 @@ boolean isUser=true;
                             <select name="major" id="major">
                                     <option selected value="0">Усі</option>
                                     <%if ((majors!=null) && !(majors.isEmpty()))
-                                      for (Integer key: majors.keySet()){
-                                          Major m = majors.get(key);%>
+                                      for (Major m: majors){%>
                                           <option value="<%=m.getId()%>"><%=m.getName()%></option>
                             </select>
                     </div>
@@ -72,7 +70,7 @@ boolean isUser=true;
                     <table>
              
                             <%if (skills!=null && !skills.isEmpty())
-                                for (Integer key = 0; key<skills.size(); key+=3){
+                                for (int key = 0; key<skills.size(); key+=3){
                                     Skill s = skills.get(key);%>
                        <tr> <td width="33%"><input type="checkbox" id="<%=s.getId()%>" value="<%=s.getName()%>"><Br>
                             </td>
@@ -99,8 +97,7 @@ boolean isUser=true;
                             <select name="startupType" id="startupType">
                                     <option selected value="0">Будь-який</option>
                                     <%if ((projectTypes!=null) && !(projectTypes.isEmpty()))
-                                      for (Integer key: projectTypes.keySet()){
-                                          ProjectType p = projectTypes.get(key);%>
+                                      for (ProjectType p: projectTypes){%>
                                           <option value="<%=p.getId()%>"><%=p.getDiscription()%></option>
                             </select>
                     </div>
@@ -111,8 +108,7 @@ boolean isUser=true;
                             <select name="startupState" id="startupState">
                                     <option selected value="0">Будь-який</option>
                                     <%if (startupstates!=null && !startupstates.isEmpty())
-                                        for (Integer key: startupstates.keySet() ){
-                                            StartupState ss = startupstates.get(key);%>
+                                        for (StartupState ss: startupstates ){%>
                                             <option value="<%=ss.getId()%>"><%=ss.getDescription()%></option>
                             </select>
                     </div>
@@ -129,8 +125,7 @@ boolean isUser=true;
         <%if (isUser)
             { if (users!=null && !users.isEmpty()) {%>
               <ul class="result-links">
-               <% for (Integer key: users.keySet())
-                   { User u = users.get(key);
+               <% for (User u: users) {
                      String userName = ((String)u.getFirstName()+" "+(String)u.getLastName());%>
                     <li> <div class="resultUser"><%=userName%></div> </br>
                             <a href="user.html">Детальніше...</a>
@@ -139,8 +134,7 @@ boolean isUser=true;
          <%}}}else {%>
           if (startups!=null && !startups.isEmpty())%>
               <ul class="result-links">
-               <% for (Integer key: startups.keySet())
-                   { Startup s = startups.get(key);%>
+               <% for (Startup s: startups) {%>
                     <li> <div class="resultUser"><%=s.getName()%></div> </br>
                         <%s.getDescription();}}%>
                             <a href="user.html">Детальніше...</a>

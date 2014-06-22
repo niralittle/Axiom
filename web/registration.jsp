@@ -8,6 +8,5 @@
 
 <jsp:include page="/WEB-INF/template.jsp">
 	<jsp:param name="content" value="registration-content"/>
-	<jsp:param name="title" value="Реєстрація"/>
+	<jsp:param name="title" value="Приєднатись"/>
 </jsp:include>
-

@@ -30,10 +30,10 @@ public class DBManager implements Closeable {
     public DBManager() throws DBManagerException {
         try {
             InitialContext initContext = new InitialContext();
-            dataSource = (DataSource) initContext.lookup("jdbc/_NOTUS");
+            dataSource = (DataSource) initContext.lookup("jdbc/_AXIOM");
         } catch (NamingException exc) {
             logger.error(exc.getMessage(), exc);
-            throw new DBManagerException("Cannot retrieve jdbc/_NOTUS", exc);
+            throw new DBManagerException("Cannot retrieve jdbc/_AXIOM", exc);
         }
         conn = this.getConnection();
     }
@@ -54,8 +54,7 @@ public class DBManager implements Closeable {
             throw new DBManagerException("SQL Exception", exc);
         }
     }
-    // REVIEW: documentation expected
-
+    
     public void commit() throws DBManagerException {
         try {
             conn.commit();

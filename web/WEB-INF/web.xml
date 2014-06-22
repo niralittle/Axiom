@@ -27,6 +27,15 @@
         <servlet-name>CaptchaServlet</servlet-name>
         <url-pattern>/Captcha</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-class>axiom.servlets.RegistrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>SearchUser</servlet-name>
@@ -90,8 +99,18 @@
             <form-error-page>/loginError.jsp</form-error-page>
             </form-login-config>
         </login-config>
+
     <security-role>
         <description/>
-        <role-name>USER</role-name>
+        <role-name>READONLY</role-name>
     </security-role>
-    </web-app>
+    <security-role>
+        <description/>
+        <role-name>ACTIVE</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>BLOCKED</role-name>
+    </security-role>
+
+</web-app>

@@ -47,29 +47,32 @@ boolean isUser=true;
 
                             <select name="faculty" id="faculty">
                                     <option selected value="0">Усі</option>
-                                    <%if ((faculties!=null) && !(faculties.isEmpty()))
+                                    <%if ((faculties!=null) && !(faculties.isEmpty())) {
                                       for (Faculty f: faculties){%>
                                           <option value="<%=f.getId()%>"><%=f.getName()%></option>
+                                    <%}}%>
                             </select>
                     </div>
-                <%}String choosedfaculty = (String)request.getAttribute("faculty");%>
+                <%String choosedfaculty = (String)request.getAttribute("faculty");%>
                     </br>
                     <div class="select-major">
                     Спеціальність
                             <select name="major" id="major">
                                     <option selected value="0">Усі</option>
-                                    <%if ((majors!=null) && !(majors.isEmpty()))
+                                    <%if ((majors!=null) && !(majors.isEmpty())) {
                                       for (Major m: majors){%>
                                           <option value="<%=m.getId()%>"><%=m.getName()%></option>
+                                    <%}}%>
+
                             </select>
                     </div>
-                    <%}String choosedmajor = (String)request.getAttribute("major");%>
+                    <%String choosedmajor = (String)request.getAttribute("major");%>
                     </br>
                     <div class="skills">
                     Необхідні вміння:</br>
                     <table>
              
-                            <%if (skills!=null && !skills.isEmpty())
+                            <%if (skills!=null && !skills.isEmpty()) {
                                 for (int key = 0; key<skills.size(); key+=3){
                                     Skill s = skills.get(key);%>
                        <tr> <td width="33%"><input type="checkbox" id="<%=s.getId()%>" value="<%=s.getName()%>"><Br>
@@ -86,7 +89,7 @@ boolean isUser=true;
                             %>
                             <td width="33%"><input type="checkbox" id="<%=s.getId()%>" value="<%=s.getName()%>"><Br>
                             </td>
-                       </tr><%}%>
+                       </tr><%}}%>
                     </table>
                     </div>
             </div>
@@ -96,23 +99,25 @@ boolean isUser=true;
                     Тип проекту
                             <select name="startupType" id="startupType">
                                     <option selected value="0">Будь-який</option>
-                                    <%if ((projectTypes!=null) && !(projectTypes.isEmpty()))
+                                    <%if ((projectTypes!=null) && !(projectTypes.isEmpty())) {
                                       for (ProjectType p: projectTypes){%>
                                           <option value="<%=p.getId()%>"><%=p.getDiscription()%></option>
+                                    <%}}%>
                             </select>
                     </div>
-                 <%}String choosedstartuptype = (String)request.getAttribute("startuptype");%>
+                 <%String choosedstartuptype = (String)request.getAttribute("startuptype");%>
                     </br>
                     <div class="select-state">
                     Стан проекту
                             <select name="startupState" id="startupState">
                                     <option selected value="0">Будь-який</option>
-                                    <%if (startupstates!=null && !startupstates.isEmpty())
+                                    <%if (startupstates!=null && !startupstates.isEmpty()) {
                                         for (StartupState ss: startupstates ){%>
                                             <option value="<%=ss.getId()%>"><%=ss.getDescription()%></option>
+                                    <%}}%>
                             </select>
                     </div>
-                 <%}String choosedstartupstate = (String)request.getAttribute("startupstate");%>
+                 <%String choosedstartupstate = (String)request.getAttribute("startupstate");%>
             </div>
 
 

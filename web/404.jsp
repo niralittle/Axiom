@@ -8,5 +8,5 @@
 
 <jsp:include page="/WEB-INF/template.jsp">
 	<jsp:param name="content" value="404-content"/>
-	<jsp:param name="title" value="Error 404"/>
+	<jsp:param name="title" value="Помилка 404"/>
 </jsp:include>

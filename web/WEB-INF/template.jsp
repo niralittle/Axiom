@@ -33,15 +33,17 @@
                 <button type="submit" class="btn btn-primary" value="Login">Увійти</button>
             </form>
         </div>
+    <%  } else { %>
+        <button type="submit" action="Logout" class="btn btn-primary" value="Logout">Вийти</button>
     <%  } %>
          <div class="pages_list">
             <ul>
                 <% if (request.getUserPrincipal() != null) { %>
                 <li><a href="UserController">Моя сторінка</a></li>
                 <% } %>
-                <li><a href="search.jsp">Стартапи</a></li>
-                <li><a href="search.jsp">Люди</a></li>
-                <li><a href="search.jsp">Пошук вакансій</a></li>
+                <li><a href="search.jsp?subject=startup">Стартапи</a></li>
+                <li><a href="search.jsp?subject=name">Люди</a></li>
+                <li><a href="search.jsp?subject=vacancy">Пошук вакансій</a></li>
             </ul>
         </div>
         <div style="background-color: #58CAD9; height: 8px;"></div>

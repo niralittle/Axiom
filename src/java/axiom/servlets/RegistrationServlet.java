@@ -1,11 +1,9 @@
 package axiom.servlets;
 
 import axiom.controllers.UserController;
-import axiom.dbmanager.DBManager;
-import axiom.dbmanager.DBManagerException;
 
+import axiom.dbmanager.DBManager;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,7 +30,7 @@ public class RegistrationServlet extends HttpServlet {
     private static Logger logger = Logger.getLogger(RegistrationServlet.class.getName());
     // pages to redirect
     private static final String REGISTRATION_PAGE = "registration.jsp";
-    private static final String CONGRATULATION_PAGE = "success.jsp";
+    private static final String CONGRATULATION_PAGE = "User";
     //UserController credentials
     private String login;
     private String password;
@@ -164,8 +162,9 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        prepareDataForRegistrationPage();
+        response.sendRedirect("registration.jsp");
+     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -191,4 +190,15 @@ public class RegistrationServlet extends HttpServlet {
         return "Registers user in the system, creates a new order " +
                 "and executes it ('New' scenario workflow).";
     }// </editor-fold>
+
+    private void prepareDataForRegistrationPage()
+             throws IOException {
+//        try {
+//            DBManager dbManager = new DBManager();
+//        } catch () {
+////
+////        } finally {
+//
+//        }
+    }
 }

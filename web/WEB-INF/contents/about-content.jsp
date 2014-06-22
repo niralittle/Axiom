@@ -6,6 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1>Axiom - проект студентів факультету Інформатики.
+<h3>Axiom - проект студентів факультету Інформатики.
 <br>
-<a href="github.com/niralittle/Axiom">Fork us on Github.</a></h1>
+<a href="https://github.com/niralittle/Axiom">Fork us on Github.</a></h3>

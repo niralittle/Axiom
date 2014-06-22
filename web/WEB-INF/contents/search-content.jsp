@@ -24,7 +24,9 @@
     List<StartupState> startupstates = (List<StartupState>) request.getAttribute("startupstate");
     List<Skill> skills = (List<Skill>) request.getAttribute("skills");
 
-    boolean isUser = true;
+    boolean isStartup = "startup".equals(request.getParameter("subject"));
+    boolean isVacancy = "vacancy".equals(request.getParameter("subject"));
+    boolean isUser = !(isStartup || isVacancy);
 %>
 <div class="content">
 
@@ -34,13 +36,11 @@
             <input type="button" value="Пошук" onmouseup="Find(this);">
         </div>
         <%String name = (String) request.getAttribute("name");%>
-        <div class="radio-button">
-            <input type="radio" checked name="kind" value="user" id="user" onclick="OnOff(this);"> User</input>
-            <input type="radio" name="kind" value="startup" id="startup" onclick="OnOff(this);"> Startup</input>
-        </div>
-        <% if ("startup".equals(request.getAttribute("kind"))) isUser = false;%>
         <div class="between"></div>
 
+        <%
+            if (isUser) {
+        %>
         <div id="forUser">
             <div class="select-faculty">
                 Факультет
@@ -111,7 +111,9 @@
                 </table>
             </div>
         </div>
-
+            <%
+                }
+            if (isStartup) {%>
         <div id="forStartup">
             <div class="select-type">
                 Тип проекту
@@ -150,6 +152,9 @@
             <%String choosedstartupstate = (String) request.getAttribute("startupstate");%>
         </div>
     </form>
+    <%
+        }
+    %>
 
     <div class="between"></div>
 
@@ -172,9 +177,7 @@
         <%
                 }
             }
-        } else {
-        %>
-        if (startups!=null && !startups.isEmpty())%>
+        } else  if (startups!=null && !startups.isEmpty()) {%>
         <ul class="result-links">
             <% for (Startup s : startups) {%>
             <li>
@@ -186,7 +189,7 @@
             </li>
             <%
                     }
-                }
+        }
             %>
         </ul>
     </div>

@@ -10,11 +10,13 @@
 <%@page import="axiom.entity.User" %>
 <%@page import="axiom.entity.Startup" %>
 <%@page import="axiom.entity.Skill" %>
+<%@page import="axiom.entity.Vacancy" %>
 
 <%
     List<User> users = (List<User>) request.getAttribute("users");
     List<Startup> startups = (List<Startup>) request.getAttribute("startups");
     List<Skill> skills = (List<Skill>) request.getAttribute("skills");
+    List<Vacancy> vacancies = (List<Vacancy>) request.getAttribute("vacancies");
 
     boolean isStartup = "startup".equals(request.getParameter("subject"));
     boolean isVacancy = "vacancy".equals(request.getParameter("subject"));
@@ -80,18 +82,38 @@
         <%
                 }
             }
-        } else  if (startups!=null && !startups.isEmpty()) {%>
+        } else {
+            if (isStartup){
+                if (startups!=null && !startups.isEmpty()) {%>
+                    <ul class="result-links">
+                    <% for (Startup s : startups) {%>
+                    <li>
+                        <div class="resultUser"><%=s.getName()%>
+                        </div>
+                        </br>
+                        <%=s.getDescription()%>
+                        <a href="user.html">Детальніше...</a>
+                    </li>
+                    <%
+                            }
+                    }
+                }
+                    %>
+               </ul>
+        <% if (isVacancy){
+            if (vacancies!=null && !vacancies.isEmpty()) {%>
         <ul class="result-links">
-            <% for (Startup s : startups) {%>
+            <% for (Vacancy v : vacancies) {%>
             <li>
-                <div class="resultUser"><%=s.getName()%>
+                <div class="resultUser"><%=v.getName()%>
                 </div>
                 </br>
-                <%=s.getDescription()%>
+                <%=v.getDescription()%>
                 <a href="user.html">Детальніше...</a>
             </li>
             <%
                     }
+            }
         }
             %>
         </ul>

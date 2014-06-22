@@ -67,35 +67,20 @@ public class Search extends HttpServlet {
         }
 
         try{
-            int i = 0;
             FacultyDAO fDAO = new FacultyDAOImpl(dbManager);
-            Map <Integer,Faculty> faculties = new HashMap <Integer,Faculty> ();
-            List<Faculty> fac = fDAO.getAllFaculties(0,10);
-            for (Faculty f: fac) faculties.put(i++, f);
+            List<Faculty> faculties = fDAO.getAllFaculties(0,10);
 
-            i = 0;
             MajorDAO mDAO = new MajorDAOImpl(dbManager);
-            Map <Integer,Major> majors = new HashMap <Integer,Major> ();
-            List<Major> maj = mDAO.getAllMajors(0,10);
-            for (Major m: maj) majors.put(i++, m);
+            List<Major> majors = mDAO.getAllMajors(0,10);
 
-            i = 0;
             ProjectTypeDAO ptDAO = new ProjectTypeDAOImpl(dbManager);
-            Map <Integer,ProjectType> projectTypes = new HashMap <Integer,ProjectType> ();
-            List<ProjectType> pt = ptDAO.getAllProjectTypes();
-            for (ProjectType a: pt) projectTypes.put(i++, a);
+            List<ProjectType> projectTypes = ptDAO.getAllProjectTypes();
 
-            i = 0;
             StartupStateDAO ssDAO = new StartupStateDAOImpl(dbManager);
-            Map <Integer,StartupState> startupstates = new HashMap <Integer,StartupState> ();
-            List<StartupState> ss = ssDAO.getAllStartupStates();
-            for (StartupState a: ss) startupstates.put(i++, a);
+            List<StartupState> startupstates = ssDAO.getAllStartupStates();
 
-            i = 0;
             SkillDAO sDAO = new SkillDAOImpl(dbManager);
-            Map <Integer,Skill> skills = new HashMap <Integer,Skill> ();
-            List<Skill> s = sDAO.getAllSkills(0, 9);
-            for (Skill a: s) skills.put(i++, a);
+            List<Skill> skills = sDAO.getAllSkills(0, 9);
 
 
             if ("user".equals(request.getAttribute("kind"))){

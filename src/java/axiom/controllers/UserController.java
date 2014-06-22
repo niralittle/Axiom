@@ -44,20 +44,19 @@ public class UserController extends Controller {
         user.setPassword(password);
         user.setFacultyID(facultyID);
         user.setMajorID(majorID);
-        user.setProfileState(ProfileState.READONLY.toInt());
-        user.setRegistrationDate(new Date(Calendar.getInstance().getTimeInMillis()));
-        userID = (Integer) userDAO.add(user);
+        user.setProfileState(ProfileState.READONLY.toInt()); 
+        userID = (Integer) userDAO.registerNewUser(user);
 
         if (isInternal) {
             dbManager.commit();
         }
         //sendEmail(userID, firstName, login, password);
-    } catch (DBManagerException exc) {
-        if (isInternal) {
-            System.out.println("Didn't write to database");
-            dbManager.rollback();
-        }
-        throw new DBManagerException(exc.getMessage());
+//    } catch (DBManagerException exc) {
+//        if (isInternal) {
+//            System.out.println("Didn't write to database");
+//            dbManager.rollback();
+//        }
+//        throw new DBManagerException(exc.getMessage());
     } finally {
         if (isInternal) {
             dbManager.close();

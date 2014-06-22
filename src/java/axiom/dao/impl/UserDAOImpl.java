@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  *
  * @author Nira
@@ -47,7 +46,7 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
     	ResultIterator ri = null;
     	boolean isExist = false;
 
-        String queryString = "SELECT login FROM OSSUSER WHERE LOGIN = ?";
+        String queryString = "SELECT s.id FROM SYSUSER s WHERE s.login = ?";
         try {
             statement = dbManager.prepareStatement(queryString);
             statement.setString(1, login);
@@ -60,9 +59,9 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
             } else {
                     isExist = false;		// login doesn't exist
             }
-        } catch (DBManagerException exc) {
-            throw new DBManagerException ("The error was occured, " +
-                            "contact the administrator");
+        //} catch (DBManagerException exc) {
+        //    throw new DBManagerException ("The error was occured, " +
+        //                    "contact the administrator");
         } finally {
             statement.close();
         }
@@ -78,7 +77,7 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
     	ResultIterator ri = null;
     	boolean isExist = false;
 
-        String queryString = "SELECT login FROM OSSUSER WHERE EMAIL = ?";
+        String queryString = "SELECT login FROM SYSUSER WHERE EMAIL = ?";
         try {
             statement = dbManager.prepareStatement(queryString);
             statement.setString(1, email);
@@ -387,6 +386,38 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
             statement.close();
         }
         return m;
+    }
+
+    public int registerNewUser(User user) throws DBManagerException {
+        Statement statement = null;
+    	String query  = "INSERT INTO SYSUSER " +
+                        "(ID, FIRSTNAME, LASTNAME, " +
+                        "MAJORID, PROFILESTATE, PASSWORD, " +
+                        "REGISTRATIONDATE, FACULTYID, EMAIL, LOGIN ) " +
+                        "VALUES " +
+                        "(SYSUSER_ID.nexval, " +
+                        "?, ?, ?, " +
+                        "?, ?, SYSDATE, " +
+                        "?, ?, ? )";
+        try {
+            statement = dbManager.prepareStatement(query);
+            statement.setString(2, user.getLastName());
+            statement.setString(1, user.getFirstName());
+            statement.setInt(3, user.getMajorID());
+            statement.setInt(4, user.getProfileState());
+            statement.setString(5, user.getPassword());
+            statement.setInt(6, user.getFacultyID());
+            statement.setString(7, user.getEmail());
+            statement.setString(8, user.getLogin());
+            System.out.println(statement.toString());
+            statement.executeUpdate();
+//         } catch (DBManagerException exc) {
+//            throw new DBManagerException ("An error occured, " +
+//                            "pleaase, contact an administrator");
+        } finally {
+            statement.close();
+        }
+        return (Integer) statement.getGeneratedPrimaryKey();
     }
 
 }

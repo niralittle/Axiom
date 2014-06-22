@@ -108,9 +108,7 @@ List<Major> majors = (List<Major>) request.getAttribute("majors");
             <td>
                 <div class="form-group" style="width: 300px;">
                     <label for="faculty">Факультет: </label>
-                    <select name="faculty" id="fac"
-                       value="<%=request.getParameter("faculty") == null ?
-                                                     "" : request.getParameter("faculty")%>">
+                    <select name="faculty" id="fac">
                         <%
                         for (Faculty f: faculties) { %>
                         <option value ="<%=f.getId()%>"><%=f.getName()%></option>

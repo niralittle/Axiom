@@ -1,11 +1,8 @@
 package axiom.servlets;
 
 import axiom.controllers.UserController;
-import axiom.dbmanager.DBManager;
-import axiom.dbmanager.DBManagerException;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

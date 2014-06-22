@@ -2,27 +2,49 @@
     Document   : main
     Created on : 15 черв 2014, 22:43:46
     Author     : Nira
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
-/* 
-   TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
 #page {
     background-color: #FFFAFA;
-    width: 700px;
+    width: 990px;
     min-height: 300px;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
 }
+
+.header {
+    background: url(/assets/axiom.png) no-repeat;
+}
+.auth {
+    width: 100%;
+    min-height: 25px;
+    margin: 5px 0 20px 0;
+}
+
+.pages_list {
+    width: 49%;
+    margin: 0 0 0 auto;
+}
+.pages_list li {
+    display: inline-block;
+    margin: 10px 20px 0px 0px;
+    font-size: 25px;
+}
+.pages_list a {
+    text-decoration: none;
+    color: #000;
+    list-style: none;
+    margin: 0 0 29px 0px;
+    padding: 0 0 5px 0;
+}
+.pages_list a:hover {
+    color: #FFCC00;
+}
 .whois {
     width: 100%;
-    margin-left: auto 0;
-    margin-right: auto 0;
+    margin-left: auto;
+    margin-right: auto;
     padding: 15px;
 }
 .avatar {
@@ -52,10 +74,6 @@
     margin-left: auto;
     margin-right: auto;
     width: 500px;
-}
-.footer {
-    width: 100%;
-    float: bottom;
 }
 
 /*----- Tabs -----*/

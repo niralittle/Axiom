@@ -31,6 +31,8 @@ public interface UserDAO extends GenericDAO<User>{
     public List<User> getUsersBySkill(int skillId, int offset,
             int numberOfRecords) throws DBManagerException;
 
+    public int getUserByLogin(String login) throws  DBManagerException;
+
     public int registerNewUser(User user) throws  DBManagerException;
     /**
      *

@@ -420,4 +420,29 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
         return (Integer) statement.getGeneratedPrimaryKey();
     }
 
+    public int getUserByLogin(String login) throws  DBManagerException{
+        if (login == null) {
+    		throw new DBManagerException("Passed parameter <name> is null" +
+                        " or empty. Can't proccess the request!");
+    	}
+    	Statement statement = null;
+    	ResultIterator ri  = null;
+        int userId;
+    	String query  = "SELECT * " +
+                        "FROM SYSUSER s " +
+                        "WHERE s.login = ?";
+        try {
+            statement = dbManager.prepareStatement(query);
+            statement.setString(1, (login));
+            ri = statement.executeQuery();
+            userId = ri.getInt("id");
+        } catch (DBManagerException exc) {
+            throw new DBManagerException ("An error occured, " +
+                            "please, contact an administrator");
+        } finally {
+            statement.close();
+        }
+        return userId;
+    }
+
 }

@@ -23,13 +23,11 @@
     boolean isUser = !(isStartup || isVacancy);
 %>
 <div class="content">
-    <form class="search-form" method="post" action="search.jsp?subject=<%=
-    isUser ? "user" : isStartup ? "startup" : "vacancy" %>">
 
-    <%
+        <%
             if (isUser) {
         %>
-
+    <form class="search-form" method="post" action="SearchUser">
         <div class="input">
             <input type="text" name="firstName" placeholder="Ім'я" <%=
             request.getParameter("firstName") !=null ? "value='" + request.getParameter("firstName") + "'" : ""
@@ -39,27 +37,28 @@
             %> size="30%">
             <input type="submit" value="Пошук">
         </div>
+    </form>
         <%
             } else if (isStartup) {
         %>
+    <form class="search-form" method="post" action="SearchStartup">
         <div class="input">
-            <input type="text" name="startup" placeholder="Назва стартапу" <%=
-            request.getParameter("startup") !=null ? "value='" + request.getParameter("startup") + "'" : ""
-            %> size="60%">
-            <input type="submit" value="Пошук">
+            <input type="text" name="startup" placeholder="Назва стартапу"
+                <%=request.getParameter("startup") !=null ? "value='" +
+                request.getParameter("startup") + "'" : "" %> size="60%">
+            <input type="submit" value="Знайти">
         </div>
-            <%
-            } else {
-        %>
+    </form>
+        <%  } else {  %>
+    <form class="search-form" method="post" action="SearchVacancy">
         <div class="input">
             <input type="text" name="vacancy" placeholder="Введіть критерій. Наприклад: java" <%=
             request.getParameter("vacancy") !=null ? "value='" + request.getParameter("vacancy") + "'" : ""
             %> size="60%">
-            <input type="submit" value="Пошук">
+            <input type="submit" value="Шукати">
         </div>
-            <%
-            }
-        %>
+    </form>
+        <%  }  %>
 
     <div class="between"></div>
 
@@ -70,53 +69,41 @@
                 if (users != null && !users.isEmpty()) {
         %>
         <ul class="result-links">
-            <% for (User u : users) {
-                String userName = ((String) u.getFirstName() + " " + (String) u.getLastName());%>
+                <% for (User u : users) {
+                    String userName = ((String) u.getFirstName() + " " + (String) u.getLastName());%>
             <li>
-                <div class="resultUser"><%=userName%>
+                <div class="result"><%=userName%>
                 </div>
                 </br>
-                <a href="user.html">Детальніше...</a>
+                <a href="User?id=<%=u.getId()%>">Детальніше...</a>
             </li>
-        </ul>
-        <%
-                }
-            }
-        } else {
-            if (isStartup){
-                if (startups!=null && !startups.isEmpty()) {%>
-                    <ul class="result-links">
-                    <% for (Startup s : startups) {%>
-                    <li>
-                        <div class="resultUser"><%=s.getName()%>
-                        </div>
-                        </br>
-                        <%=s.getDescription()%>
-                        <a href="user.html">Детальніше...</a>
-                    </li>
-                    <%
-                            }
-                    }
-                }
-                    %>
-               </ul>
-        <% if (isVacancy){
-            if (vacancies!=null && !vacancies.isEmpty()) {%>
-        <ul class="result-links">
-            <% for (Vacancy v : vacancies) {%>
+                <%  }  %>
+       </ul>
+    <%           }
+           } else  if (startups!=null && !startups.isEmpty()) { %>
+         <ul class="result-links">
+            <% for (Startup v : startups) {%>
             <li>
-                <div class="resultUser"><%=v.getName()%>
+                <div class="result"><%=v.getName()%>
                 </div>
                 </br>
                 <%=v.getDescription()%>
-                <a href="user.html">Детальніше...</a>
+                <a href="Startup?id=<%=v.getId()%>">Детальніше...</a>
             </li>
-            <%
-                    }
-            }
-        }
-            %>
-        </ul>
+           <%  } %>
+            </ul>
+        <% } else  if (vacancies!=null && !vacancies.isEmpty()) { %>
+         <ul class="result-links">
+            <% for (Vacancy v : vacancies) {%>
+            <li>
+                <div class="result"><%=v.getName()%>
+                </div>
+                </br>
+                <%=v.getDescription()%>
+                <a href="Vacancy?id=<%=v.getID()%>">Детальніше...</a>
+            </li>
+    <%         }
+           } %>
+         </ul>
     </div>
-  </form>
 </div>

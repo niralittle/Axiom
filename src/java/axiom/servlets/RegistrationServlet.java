@@ -11,6 +11,7 @@ import axiom.dbmanager.DBManagerException;
 import java.io.IOException;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.Exception;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,7 +57,7 @@ public class RegistrationServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
             HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, DBManagerException {
         //local variable derclaration
         boolean isParamsValid;
         StringBuilder errMessage = new StringBuilder();
@@ -77,9 +78,9 @@ public class RegistrationServlet extends HttpServlet {
                                     lastName,faculty, major);
                     System.out.println("Success! UserID = " + check);
                     redirectTo(CONGRATULATION_PAGE, request, response);
-                } catch (Exception e) {
-                    System.out.println("Something went wrong when trying " +
-                            "to create a new user");
+                //} catch (Exception e) {
+                //    System.out.println("Something went wrong when trying " +
+                //            "to create a new user");
                 } finally {
                     
                 }
@@ -100,7 +101,8 @@ public class RegistrationServlet extends HttpServlet {
         email = request.getParameter("email");
         firstName = request.getParameter("firstName");
         lastName = request.getParameter("lastName");
-        faculty = Integer.parseInt(request.getParameter("faculty"));
+        System.out.println(request.getParameter("faculty"));
+        faculty = 1;//Integer.parseInt(request.getParameter("faculty"));
         major = Integer.parseInt(request.getParameter("major"));
         // read captcha
         inputtedCaptcha = request.getParameter("code");
@@ -193,7 +195,14 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DBManagerException ex) {
+            Logger.getLogger(RegistrationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            RuntimeException e = new RuntimeException();
+            e.initCause(ex.getCause());
+            throw e;
+        }
 
     }
 

@@ -223,4 +223,37 @@ public class StartupDAOImpl extends GenericDAOImpl<Startup> implements StartupDA
         return (Integer) statement.getGeneratedPrimaryKey();
     }
 
+
+    public Startup getStartupById(int id) throws  DBManagerException{
+        if (id <= 0) {
+    		throw new DBManagerException();
+    	}
+        Startup s = new Startup();
+    	Statement statement = null;
+    	ResultIterator ri  = null;
+    	String query  = "SELECT * " +
+                        "FROM STARTUP s " +
+                        "WHERE s.id = ?";
+        try {
+            statement = dbManager.prepareStatement(query);
+            statement.setInt(1, id);
+            ri = statement.executeQuery();
+
+            s.setId(ri.getInt("ID"));
+            s.setName(ri.getString("NAME"));
+            s.setOwnerId(ri.getInt("OWNERID"));
+            s.setProjectType(ri.getInt("PROJECTTYPE"));
+            s.setDescription(ri.getString("DESCRIPTION"));
+            s.setStartupStateID(ri.getInt("STARTUPSTATEID"));
+        } catch (DBManagerException exc) {
+            throw new DBManagerException ();
+        } finally {
+            statement.close();
+        }
+        return s;
+    
+
+    }
+
+
 }

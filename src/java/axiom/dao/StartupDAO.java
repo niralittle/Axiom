@@ -24,5 +24,7 @@ public interface StartupDAO extends GenericDAO<Startup> {
             int numberOfRecords) throws DBManagerException;
 
     public int createNewStartup (Startup startup) throws  DBManagerException;
+
+    public Startup getStartupById(int id) throws  DBManagerException;
     
  }

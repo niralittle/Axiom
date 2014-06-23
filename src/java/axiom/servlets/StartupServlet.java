@@ -1,25 +1,19 @@
 package axiom.servlets;
 
-import axiom.controllers.NewStartupController;
-
-import axiom.dao.ProjectTypeDAO;
-import axiom.dao.StartupStateDAO;
+import axiom.dao.ParticipantDAO;
 import axiom.dao.StartupDAO;
-import axiom.dao.UserDAO;
 import axiom.dao.VacancyDAO;
-import axiom.dao.impl.ProjectTypeDAOImpl;
-import axiom.dao.impl.StartupStateDAOImpl;
+import axiom.dao.impl.ParticipantDAOImpl;
 import axiom.dao.impl.StartupDAOImpl;
-import axiom.dao.impl.UserDAOImpl;
 import axiom.dao.impl.VacancyDAOImpl;
 import axiom.dbmanager.DBManager;
 import axiom.dbmanager.DBManagerException;
 
+import axiom.entity.Startup;
 import axiom.entity.User;
 import axiom.entity.Vacancy;
 import java.io.IOException;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,13 +24,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class StartupServlet extends HttpServlet{
     
-    private int startupId;
+    private int ID;
 
      protected void processRequest(HttpServletRequest request,
             HttpServletResponse response) {
@@ -54,7 +46,7 @@ public class StartupServlet extends HttpServlet{
             java.util.logging.Logger.getLogger(RegistrationServlet.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
-        RequestDispatcher view = request.getRequestDispatcher("Startup"+startupId+".jsp");
+        RequestDispatcher view = request.getRequestDispatcher("Startup"+ID+".jsp");
         view.forward(request, response);
      }
 
@@ -87,18 +79,19 @@ public class StartupServlet extends HttpServlet{
         DBManager dbManager = null;
         try {
             dbManager = new DBManager();
+            ID = (Integer)req.getAttribute("startupId");
             StartupDAO startupDAO = new StartupDAOImpl(dbManager);
-            StartupStateDAO ssDAO = new StartupStateDAOImpl(dbManager);
-            ProjectTypeDAO ptDAO = new ProjectTypeDAOImpl(dbManager);
-            UserDAO userDAO = new UserDAOImpl(dbManager);
+            ParticipantDAO partDAO = new ParticipantDAOImpl(dbManager);
             VacancyDAO vacDAO = new VacancyDAOImpl(dbManager);
-            ArrayList<Vacancy> vacancies = new ArrayList<Vacancy>();
-            ArrayList<User> team = new ArrayList<User>();
-            int ID = req.getAttribute("startupId");
-            req.setAttribute("projectTypes", prTypes);
-            req.setAttribute("startupStates", startupStates);
-            req.setAttribute("name", name);
-            req.setAttribute("description", description);
+            List<Vacancy> vacancies = new ArrayList<Vacancy>();
+            vacancies = vacDAO.getVacancyByStartup(ID, 0, 20);
+            List<User> team = new ArrayList<User>();
+            team = partDAO.getParticipants(ID);
+            Startup start = startupDAO.getStartupById(ID);
+            req.setAttribute("projectTypes", start.getProjectType());
+            req.setAttribute("startupStates", start.getStartupStateID());
+            req.setAttribute("name", start.getName());
+            req.setAttribute("description", team);
             req.setAttribute("vacancies", vacancies);
         } catch (DBManagerException ex) {
             Logger.getLogger(RegistrationServlet.class.getName())

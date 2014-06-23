@@ -18,18 +18,18 @@ List<ProjectType> projectTypes = (List<ProjectType>) request.getAttribute("proje
 int numbOfVacansies = 1;
 %>
 
-<form name="newStartup" method="post" onsubmit="return validate()" action="newStartupVacancy">
+<form name="newStartup" method="post" onsubmit="return validate()" action="NewStartupVacancy">
     <h4>Будь ласка, опишіть, яких учасників проекту ви шукаєте: </h4>
 
 <%= request.getAttribute("errMessage") == null ? "" : request.getAttribute("errMessage")%>
 
     <table border="0" cellpadding="5" name = "VacancyTable" id = "VacancyTable">
-         <tr>
+        <tr id="Vacancy">
             <td>
                 <div class="form-group" style="width: 300px;">
                     <label for="name">Назва: </label>
                     <input class="form-control" required type="text"
-                           name="name" id="name"
+                           name="name1" id="name1"
                        value="<%=request.getParameter("name") == null ?
                            "" : request.getParameter("name")%>" />
                 </div>
@@ -37,8 +37,8 @@ int numbOfVacansies = 1;
             <td>
                 <div class="form-group" style="width: 300px;">
                     <label for="description">Опис вакансії:</label>
-                    <input class="form-control" required type="text" name="description"
-                           id="description"
+                    <input class="form-control" required type="text" name="description1"
+                           id="description1"
                        value="<%=request.getParameter("description") == null ? ""
                        : request.getParameter("description")%>" />
                 </div>

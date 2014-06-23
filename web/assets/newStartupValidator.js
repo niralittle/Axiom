@@ -37,14 +37,14 @@ function insertVacancy(){
     y.innerHTML="<div class=\"form-group\" style=\"width: 300px;\">" +
                     "<label for=\"name\">Назва: </label>" +
                     "<input class=\"form-control\" required type=\"text\"" +
-                           "name=\"name\" id=\"name\"" +
+                           "name=\"name"+numb+"\" id=\"name"+numb+"\"" +
                       " value=\"<%=request.getParameter(\"name\") == null ?" +
                            "\"\" : request.getParameter(\"name\")%>\" />" +
                 "</div>";
     z.innerHTML="<div class=\"form-group\" style=\"width: 300px;\">" +
                    " <label for=\"description\">Опис вакансії:</label>" +
-                   " <input class=\"form-control\" required type=\"text\" name=\"description\"" +
-                         "id=\"description\"" +
+                   " <input class=\"form-control\" required type=\"text\" name=\"description"+numb+"\"" +
+                         "id=\"description"+numb+"\"" +
                        "value=\"<%=request.getParameter(\"description\") == null ? \"\"" +
                        ": request.getParameter(\"description\")%>\" />" +
                 "</div>";

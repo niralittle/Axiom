@@ -18,4 +18,6 @@ public interface VacancyDAO extends GenericDAO<Vacancy>{
             int numberOfRecords) throws DBManagerException;
 
     public Vacancy getVacancyByName(String name) throws DBManagerException;
+
+    public int createNewVacancy (Vacancy vacancy) throws  DBManagerException;
 }

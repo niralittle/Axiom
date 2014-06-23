@@ -8,5 +8,5 @@
 
 <jsp:include page="/WEB-INF/template.jsp">
 	<jsp:param name="content" value="newStartupVacancies-content"/>
-	<jsp:param name="title" value="Створити новий проект"/>
+	<jsp:param name="title" value="Додати вакансії до проекту"/>
 </jsp:include>

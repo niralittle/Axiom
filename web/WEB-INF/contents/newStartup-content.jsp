@@ -17,7 +17,7 @@ List<StartupState> startupStates = (List<StartupState>) request.getAttribute("st
 List<ProjectType> projectTypes = (List<ProjectType>) request.getAttribute("projectTypes");
 %>
 
-<form name="newStartup" method="post" onsubmit="return validate()" action="newStartup">
+<form name="newStartup" method="post" onsubmit="return validate()" action="NewStartup">
     <h4>Будь ласка, заповніть усі поля нижче: </h4>
 
 <%= request.getAttribute("errMessage") == null ? "" : request.getAttribute("errMessage")%>

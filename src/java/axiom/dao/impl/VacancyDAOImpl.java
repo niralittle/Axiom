@@ -137,6 +137,31 @@ public class VacancyDAOImpl extends GenericDAOImpl<Vacancy> implements VacancyDA
         return v;
     }
 
+    public int createNewVacancy (Vacancy vacancy) throws  DBManagerException{
+    Statement statement = null;
+    	String query  = "INSERT INTO VACANCY " +
+                        "(ID, NAME, DESCRIPTION, " +
+                        "STURTUPID, DATE) " +
+                        "VALUES " +
+                        "(VACANCY_ID.nexval, " +
+                        "?, ?, ?, " +
+                        "?)";
+        try {
+            statement = dbManager.prepareStatement(query);
+            statement.setString(1, vacancy.getName());
+            statement.setString(2, vacancy.getDescription());
+            statement.setInt(3, vacancy.getStartupId());
+            statement.setDate(4, vacancy.getDate());
+            statement.executeUpdate();
+//         } catch (DBManagerException exc) {
+//            throw new DBManagerException ("An error occured, " +
+//                            "pleaase, contact an administrator");
+        } finally {
+            statement.close();
+        }
+        return (Integer) statement.getGeneratedPrimaryKey();
+    }
+
 
 
 

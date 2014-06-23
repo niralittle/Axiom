@@ -36,7 +36,7 @@ public class NewStartup extends HttpServlet {
     private static final String NAME_PATTERN = "^[A-Za-zА-Яа-я0-9_-]{3,40}$";
     private static final String DESCRIPTION_PATTERN = "^[A-Za-zА-Яа-я0-9!@#$%^&*()_]{6,40}$";
 
-    private static final String CREATE_STARTUP_PAGE = "registration.jsp";
+    private static final String CREATE_STARTUP_PAGE = "newStartup.jsp";
     private static final String VACANCY_PAGE = "newStartupVacancies.jsp";
     //UserController credentials
     private String name;

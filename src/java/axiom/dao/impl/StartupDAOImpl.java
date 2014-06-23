@@ -196,4 +196,31 @@ public class StartupDAOImpl extends GenericDAOImpl<Startup> implements StartupDA
         return li;
     }
 
+    public int createNewStartup (Startup startup) throws  DBManagerException{
+        Statement statement = null;
+    	String query  = "INSERT INTO STARTUP " +
+                        "(ID, NAME, DESCRIPTION, " +
+                        "OWNERID, PROJECTTYPE, STARTUPSTATEID) " +
+                        "VALUES " +
+                        "(STARTUP_ID.nexval, " +
+                        "?, ?, ?, " +
+                        "?, ?)";
+        try {
+            statement = dbManager.prepareStatement(query);
+            statement.setString(1, startup.getName());
+            statement.setString(2, startup.getDescription());
+            statement.setInt(3, startup.getOwnerId());
+            statement.setInt(4, startup.getProjectType());
+            statement.setInt(5, startup.getStartupStateID());
+            System.out.println(statement.toString());
+            statement.executeUpdate();
+//         } catch (DBManagerException exc) {
+//            throw new DBManagerException ("An error occured, " +
+//                            "pleaase, contact an administrator");
+        } finally {
+            statement.close();
+        }
+        return (Integer) statement.getGeneratedPrimaryKey();
+    }
+
 }

@@ -56,9 +56,7 @@ List<ProjectType> projectTypes = (List<ProjectType>) request.getAttribute("proje
             <td>
                 <div class="form-group" style="width: 300px;">
                     <label for="projectType">Тип проекту: </label>
-                    <select name="projectType" id="projectType"
-                       value="<%=request.getParameter("projectType") == null ?
-                                "" : request.getParameter("projectType")%>">
+                    <select name="projectType" id="projectType">
                         <%
                         for (ProjectType pt: projectTypes) { %>
                         <option value ="<%=pt.getId()%>"><%=pt.getDiscription()%></option>
@@ -67,7 +65,7 @@ List<ProjectType> projectTypes = (List<ProjectType>) request.getAttribute("proje
                 </div>
             </td>
             <td>
-                <div id="facMsg"></div>
+                <div id="projectTypeMsg"></div>
             </td>
         </tr>
         <% }

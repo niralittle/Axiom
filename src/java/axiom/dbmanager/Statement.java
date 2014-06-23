@@ -87,7 +87,7 @@ public class Statement implements Closeable {
             return rowsAffected;
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
-            throw new DBManagerException("Can't execute query.", exc);
+            throw new DBManagerException("Can't execute update.", exc);
         }
     }
 

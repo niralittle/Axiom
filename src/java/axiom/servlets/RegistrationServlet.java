@@ -103,7 +103,7 @@ public class RegistrationServlet extends HttpServlet {
         lastName = request.getParameter("lastName");
         System.out.println(request.getParameter("faculty"));
         faculty = 1;//Integer.parseInt(request.getParameter("faculty"));
-        major = Integer.parseInt(request.getParameter("major"));
+        major = 1;//Integer.parseInt(request.getParameter("major"));
         // read captcha
         inputtedCaptcha = request.getParameter("code");
         generatedCaptcha = (String) request.getSession().getAttribute("captcha");

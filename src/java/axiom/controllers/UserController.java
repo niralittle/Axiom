@@ -6,8 +6,6 @@ import axiom.dbmanager.DBManager;
 import axiom.dbmanager.DBManagerException;
 import axiom.states.ProfileState;
 import axiom.entity.User;
-import java.sql.Date;
-import java.util.Calendar;
 
 /**
  *
@@ -50,13 +48,12 @@ public class UserController extends Controller {
         if (isInternal) {
             dbManager.commit();
         }
-        //sendEmail(userID, firstName, login, password);
-//    } catch (DBManagerException exc) {
-//        if (isInternal) {
-//            System.out.println("Didn't write to database");
-//            dbManager.rollback();
-//        }
-//        throw new DBManagerException(exc.getMessage());
+     } catch (DBManagerException exc) {
+        if (isInternal) {
+            System.out.println("Didn't write to database");
+            dbManager.rollback();
+        }
+        throw new DBManagerException(exc.getMessage());
     } finally {
         if (isInternal) {
             dbManager.close();

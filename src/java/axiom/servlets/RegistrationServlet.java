@@ -10,8 +10,7 @@ import axiom.dbmanager.DBManager;
 import axiom.dbmanager.DBManagerException;
 import java.io.IOException;
 
-import java.io.UnsupportedEncodingException;
-import java.lang.Exception;
+import java.io.UnsupportedEncodingException; 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,9 +77,9 @@ public class RegistrationServlet extends HttpServlet {
                                     lastName,faculty, major);
                     System.out.println("Success! UserID = " + check);
                     redirectTo(CONGRATULATION_PAGE, request, response);
-                //} catch (Exception e) {
-                //    System.out.println("Something went wrong when trying " +
-                //            "to create a new user");
+                } catch (Exception e) {
+                    System.out.println("Something went wrong when trying " +
+                            "to create a new user");
                 } finally {
                     
                 }

@@ -411,9 +411,9 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO {
             statement.setString(8, user.getLogin());
             System.out.println(statement.toString());
             statement.executeUpdate();
-//         } catch (DBManagerException exc) {
-//            throw new DBManagerException ("An error occured, " +
-//                            "pleaase, contact an administrator");
+         } catch (DBManagerException exc) {
+            throw new DBManagerException ("An error occured, " +
+                            "pleaase, contact an administrator");
         } finally {
             statement.close();
         }

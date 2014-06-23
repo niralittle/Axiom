@@ -74,7 +74,6 @@ public class NewStartupVacancy extends HttpServlet {
             description = request.getParameter("description"+Integer.toString(i));
             vacancies.put(name, description);
         }
-        date = new Date();
     }
 
     /**

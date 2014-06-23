@@ -37,7 +37,7 @@ public class NewStartup extends HttpServlet {
     private static final String DESCRIPTION_PATTERN = "^[A-Za-zА-Яа-я0-9!@#$%^&*()_]{6,40}$";
 
     private static final String CREATE_STARTUP_PAGE = "registration.jsp";
-    private static final String CONGRATULATION_PAGE = "index.jsp";
+    private static final String VACANCY_PAGE = "newStartupVacancies.jsp";
     //UserController credentials
     private String name;
     private String description;;
@@ -70,7 +70,8 @@ public class NewStartup extends HttpServlet {
                     NewStartupController startControl = new NewStartupController();
                     int check = startControl.createNewStartup(name, description, ownerId, projectTypeId, startupStateId);
                     System.out.println("Success! StartupID = " + check);
-                    redirectTo(CONGRATULATION_PAGE, request, response);
+                    request.setAttribute("startupId", check);
+                    redirectTo(VACANCY_PAGE, request, response);
                 //} catch (Exception e) {
                 //    System.out.println("Something went wrong when trying " +
                 //            "to create a new startup");

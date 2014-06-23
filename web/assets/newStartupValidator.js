@@ -28,3 +28,25 @@
 	// send page to server side only if inputed data is correct
 	return valid;
 };
+
+function insertVacancy(){
+    var numb = document.getElementsByName("numbOfVacansies")
+    var x=document.getElementById("VacancyTable").insertRow(++numb);
+    var y=x.insertCell(0)
+    var z=x.insertCell(1)
+    y.innerHTML="<div class=\"form-group\" style=\"width: 300px;\">" +
+                    "<label for=\"name\">Назва: </label>" +
+                    "<input class=\"form-control\" required type=\"text\"" +
+                           "name=\"name\" id=\"name\"" +
+                      " value=\"<%=request.getParameter(\"name\") == null ?" +
+                           "\"\" : request.getParameter(\"name\")%>\" />" +
+                "</div>";
+    z.innerHTML="<div class=\"form-group\" style=\"width: 300px;\">" +
+                   " <label for=\"description\">Опис вакансії:</label>" +
+                   " <input class=\"form-control\" required type=\"text\" name=\"description\"" +
+                         "id=\"description\"" +
+                       "value=\"<%=request.getParameter(\"description\") == null ? \"\"" +
+                       ": request.getParameter(\"description\")%>\" />" +
+                "</div>";
+
+};

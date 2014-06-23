@@ -26,7 +26,7 @@ List<ProjectType> projectTypes = (List<ProjectType>) request.getAttribute("proje
          <tr>
             <td>
                 <div class="form-group" style="width: 300px;">
-                    <label for="fname">Назва: </label>
+                    <label for="name">Назва: </label>
                     <input class="form-control" required type="text"
                            name="name" id="name"
                        value="<%=request.getParameter("name") == null ?
@@ -40,7 +40,7 @@ List<ProjectType> projectTypes = (List<ProjectType>) request.getAttribute("proje
         <tr>
             <td>
                 <div class="form-group" style="width: 300px;">
-                    <label for="login">Опис:</label>
+                    <label for="description">Опис:</label>
                     <input class="form-control" required type="text" name="description"
                            id="description"
                        value="<%=request.getParameter("description") == null ? ""

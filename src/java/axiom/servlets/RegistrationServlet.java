@@ -100,9 +100,10 @@ public class RegistrationServlet extends HttpServlet {
         email = request.getParameter("email");
         firstName = request.getParameter("firstName");
         lastName = request.getParameter("lastName");
-        System.out.println(request.getParameter("faculty"));
-        faculty = 1;//Integer.parseInt(request.getParameter("faculty"));
-        major = 1;//Integer.parseInt(request.getParameter("major"));
+        System.out.println("Faculty: " + request.getParameter("faculty"));
+        System.out.println("Major: " + request.getParameter("major"));
+        faculty = Integer.parseInt(request.getParameter("faculty"));
+        major = Integer.parseInt(request.getParameter("major"));
         // read captcha
         inputtedCaptcha = request.getParameter("code");
         generatedCaptcha = (String) request.getSession().getAttribute("captcha");
@@ -140,17 +141,7 @@ public class RegistrationServlet extends HttpServlet {
             errMessage.append("- Логін має бути " +
          "не коротший від трьох символів, без пробілів та не більше 30 символів у довжину.<br />");
         }
-//        matcher = pattern.matcher(NAME_PATTERN);
-//        if (!matcher.matches()) {
-//            isValid = false;
-//            errMessage.append("- Прізвище повинно бути без пробілів.<br />");
-//
-//        }
-//        matcher = pattern.matcher(NAME_PATTERN);
-//        if (!matcher.matches()) {
-//            isValid = false;
-//            errMessage.append("- Введіть ім'я без пробілів.<br />");
-//        }
+
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
         if (!matcher.matches()) {

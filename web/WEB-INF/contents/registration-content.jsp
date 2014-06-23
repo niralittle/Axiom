@@ -111,7 +111,7 @@ List<Major> majors = (List<Major>) request.getAttribute("majors");
                     <select name="faculty" id="fac">
                         <%
                         for (Faculty f: faculties) { %>
-                        <option value ="<%=f.getId()%>"><%=f.getName()%></option>
+                        <option value="<%=f.getId()%>"><%=f.getName()%></option>
                     <% } %>
                     </select>
                 </div>

@@ -20,7 +20,6 @@ public class AuthServlet extends HttpServlet {
         String username = request.getParameter("j_username");
         String password = request.getParameter("j_password");
 
-        StringBuilder sb = new StringBuilder();
         //validate user in system
         response.sendRedirect("j_security_check?j_username="
                         + username + "&j_password=" + password);

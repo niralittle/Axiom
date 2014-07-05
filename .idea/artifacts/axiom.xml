@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="axiom">
+    <output-path>$PROJECT_DIR$/out/artifacts/axiom</output-path>
+    <root id="archive" name="axiom.war">
+      <element id="javaee-facet-resources" facet="web/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Axiom" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="log4j-1.2.17" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/conf/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
